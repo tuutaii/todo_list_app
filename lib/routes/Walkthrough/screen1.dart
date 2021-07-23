@@ -11,7 +11,7 @@ class Screen1 extends StatelessWidget {
             
             children: <Widget>[
                Image.asset('assets/images/fill1.png'),
-               Text('aking', style: TextStyle(color: Colors.red)) 
+               Text('aking', style: TextStyle(color: Colors.blue)) 
             ] 
              
           ),
