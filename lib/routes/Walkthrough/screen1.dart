@@ -7,11 +7,19 @@ class Screen1 extends StatelessWidget {
     return Scaffold(
         body: Center(
           child: Column( 
-            mainAxisAlignment: MainAxisAlignment.center,
-            
+            mainAxisAlignment: MainAxisAlignment.center,        
             children: <Widget>[
-               Image.asset('assets/images/fill1.png'),
-               Text('aking', style: TextStyle(color: Colors.blue)) 
+               Image.asset('assets/images/fill1.png'), 
+               Container(
+                 margin: EdgeInsets.all(20),
+                 child: Text('aking', 
+                  style: TextStyle(
+                  color: Colors.black, 
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'f1',
+                  fontSize: 48,)),
+               ) 
+                
             ] 
              
           ),
