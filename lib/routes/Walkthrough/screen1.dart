@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class Screen1 extends StatelessWidget {
   const Screen1();
@@ -14,7 +15,12 @@ class Screen1 extends StatelessWidget {
                  margin: EdgeInsets.all(20),
                  child: Text('aking', 
                   style: TextStyle(
-                  color: Colors.black, 
+                  color: Colors.black,
+                  shadows: [Shadow(
+                    blurRadius: 20,
+                    offset: Offset(0,10),
+                    color: Colors.black.withOpacity(0.5)) 
+                  ], 
                   fontWeight: FontWeight.bold,
                   fontFamily: 'f1',
                   fontSize: 48,)),

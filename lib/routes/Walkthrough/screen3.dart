@@ -1,23 +1,24 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 
-class Screen2 extends StatelessWidget {
-  const Screen2();
+class Screen3 extends StatelessWidget {
+  const Screen3();
+
   @override
   Widget build(BuildContext context) {
- 
     return Scaffold(
-        body: SafeArea(
-          child: Column(  
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,    
-            children: <Widget>[
-              SizedBox(
-                height: 40 ,
-              ),
-               Image.asset('assets/images/screen3.png',), 
-               Column(
+      body: SafeArea(
+        child: 
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            SizedBox(
+              height: 60 ,
+            ),
+            Image.asset('assets/images/screen3.png',
+            fit: BoxFit.cover),
+            Column(
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
@@ -37,8 +38,20 @@ class Screen2 extends StatelessWidget {
               ),
               ],
             ),
-         
-                Stack(
+
+             
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Image.asset('assets/images/Oval2.png'),
+                Image.asset('assets/images/Oval1.png'),
+                Image.asset('assets/images/Oval3.png'),
+              ],),
+              SizedBox(
+                height: 20,
+              ),
+            Stack(
                 alignment: Alignment.center,
                 children: <Widget>[ 
                 Image.asset('assets/images/Group2.png',
@@ -84,10 +97,12 @@ class Screen2 extends StatelessWidget {
                   ),),
                 )
               ],
-            ),   
-            ]              
-          ),                     
+            )
+          ],
         ),
-    ); 
+      ),
+
+    );
   }
+
 }
