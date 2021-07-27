@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:todo_list_app/widgets/bar.dart';
+
+import 'package:todo_list_app/routes/WorkList/today.dart';
+
+
+
+
+
 
 
 
@@ -22,7 +28,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(fontFamily: '1'),
-      home: Bar(),
+      home: Today(),
     );
   }
 }
