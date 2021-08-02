@@ -68,7 +68,7 @@ class _CreateState extends State<Task> {
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     color: Colors.grey.withOpacity(0.2),
                   ),
-                  child: Text(
+                  child: Text(     
                     'Asignee',
                     style: TextStyle(fontSize: 18),
                   ),
