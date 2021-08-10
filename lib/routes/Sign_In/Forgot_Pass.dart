@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_list_app/routes/Sign_In/resetpass.dart';
+import 'package:todo_list_app/routes/Sign_In/Reset_Pass.dart';
 import 'login.dart';
 
 class Forgot extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_list_app/routes/Sign_In/forgetpass.dart';
+import 'package:todo_list_app/routes/Sign_In/Forgot_Pass.dart';
 import 'package:todo_list_app/routes/Walkthrough/getstarted.dart';
 
 class LoginPage extends StatefulWidget {
