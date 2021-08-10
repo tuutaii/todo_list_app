@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'WorkList.dart';
+
 class Note extends StatefulWidget{
   const Note();
 
@@ -11,49 +13,55 @@ class Note extends StatefulWidget{
 class _NoteState extends State<Note> {
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      SizedBox(
-        height: 151,
-        child: DefaultTabController(
-          length: 2,
-          child: AppBar(
-            leading: Icon(Icons.arrow_back),
+    return Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>Tab1()));}, 
+              icon: Icon(Icons.west)),
+
             title: Text(
               'New Note',
               style: TextStyle(
                 fontFamily: 'f1',
+                fontSize: 20
               ),
             ),
             backgroundColor: Color(0xFFF96060),
             centerTitle: true,
+            elevation: 0,
           ),
-        ),
-      ),
-      Container( 
-        margin: EdgeInsets.only(left: 30, top: 100, right: 30, bottom: 50),
-        height: 550,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5), 
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
-            ),
-          ],
-        ),
-        child: SingleChildScrollView(
+          body: Container(
+            height: MediaQuery.of(context).size.height,
+            child: Stack(
+              children: [
+                Container(
+                  height: 30,
+                  color: Color(0xFFF96060),
+                ),
+                Positioned(
+                  bottom: 0,
+                  child: Container(
+                    height: 70,
+                    width: MediaQuery.of(context).size.width,
+                    color: Colors.black.withOpacity(0.8),
+
+                  )),
+                  Container(
+                    margin:  EdgeInsets.symmetric(horizontal: 30),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(7)),
+                      color: Colors.white
+
+                    ),
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height*0.86,
+                    child: SingleChildScrollView(
           child: Column(
           children: [
             SizedBox(
-              height: 25,
-            ),
-            SizedBox(
               height: 15,
             ),
+          
             Container(
               padding: EdgeInsets.all(15),
               child: Column(
@@ -189,7 +197,14 @@ class _NoteState extends State<Note> {
           ],
         ),
       ),
-      )
-    ]);
+                    
+                  )
+
+              ],
+            ),
+
+          ),
+        );
+     
   }
 }

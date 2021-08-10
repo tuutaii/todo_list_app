@@ -1,10 +1,24 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_list_app/routes/WorkList/WorkList.dart';
 
-class Success extends StatelessWidget{
+class Success extends StatefulWidget{
   const Success();
 
   @override
+  _SuccessState createState() => _SuccessState();
+}
+
+class _SuccessState extends State<Success> {
+  @override
+  void initState() {
+   Timer(Duration(seconds: 5), openTab);
+
+  super.initState();    
+  // DO YOUR STUFF
+}
   Widget build(BuildContext context) {
     return Scaffold(
 
@@ -52,5 +66,8 @@ class Success extends StatelessWidget{
           ),
         ) ,)
     );
+  }
+  void openTab(){
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>Tab1()));
   }
 }

@@ -1,9 +1,26 @@
+
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'getstarted.dart';
 
-class Screen1 extends StatelessWidget {
+class Screen1 extends StatefulWidget {
   const Screen1();
+
   @override
+  _Screen1State createState() => _Screen1State();
+}
+
+class _Screen1State extends State<Screen1> {
+  
+  @override
+ void initState() {
+   Timer(Duration(seconds: 5), openOnBoard);
+
+  super.initState();    
+  // DO YOUR STUFF
+}
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
@@ -32,5 +49,8 @@ class Screen1 extends StatelessWidget {
                      
         ),
     );
+  }
+  void openOnBoard(){
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>Onboarding()));
   }
 }

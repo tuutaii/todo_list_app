@@ -1,7 +1,9 @@
 
 
 import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
+import 'package:todo_list_app/routes/WorkList/WorkList.dart';
 
 
 class Task extends StatefulWidget {
@@ -14,47 +16,53 @@ class Task extends StatefulWidget {
 class _CreateState extends State<Task> {
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      SizedBox(
-        height: 151,
-        child: DefaultTabController(
-          length: 2,
-          child: AppBar(
-            leading: Icon(Icons.arrow_back),
+    return Scaffold(
+      backgroundColor: Colors.white,
+          appBar: AppBar(
+            leading: IconButton(
+              onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>Tab1()));}, 
+              icon: Icon(Icons.west)),
+
             title: Text(
               'New Task',
               style: TextStyle(
                 fontFamily: 'f1',
+                fontSize: 20
               ),
             ),
             backgroundColor: Color(0xFFF96060),
             centerTitle: true,
+            elevation: 0,
           ),
-        ),
-      ),
-      Container( 
-        margin: EdgeInsets.only(left: 30, top: 100, right: 30, bottom: 50),
-        height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
-            ),
-          ],
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-          children: [
-            SizedBox(
-              height: 25,
-            ),
-            Row(
+          body: Container(
+            height: MediaQuery.of(context).size.height,
+            child: Stack(
+              children: [
+                Container(
+                  height: 30,
+                  color: Color(0xFFF96060),
+                ),
+                Positioned(
+                  bottom: 0,
+                  child: Container(
+                    height: 70,
+                    width: MediaQuery.of(context).size.width,
+                    color: Colors.black.withOpacity(0.8),
+
+                  )),
+                  Container(
+                    margin:  EdgeInsets.symmetric(horizontal: 30),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(7)),
+                      color: Colors.white
+
+                    ),
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height*0.86,
+                    child: SingleChildScrollView(
+                      child: Column(children: [
+                        SizedBox(height: 25,),
+                        Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text('For',
@@ -178,7 +186,7 @@ class _CreateState extends State<Task> {
                   ),
                   Container(
                     padding: EdgeInsets.all(20),
-                    color: Colors.grey.withOpacity(0.2),
+                    color: Colors.grey.withOpacity(0.2),            
                     child: TextField(
                       decoration: InputDecoration(
                         hintText: 'Due Date',
@@ -206,11 +214,8 @@ class _CreateState extends State<Task> {
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                           color: Colors.grey.withOpacity(0.2)),
                           child: Text('Anyone', style: TextStyle(fontSize: 18),),
-                          )
-                ],
-              ),
-            ),
-            SizedBox(height: 20),
+                          ),
+                          SizedBox(height: 20),
             Container(padding: EdgeInsets.symmetric(vertical: 15),
             width: 300,
             decoration: BoxDecoration(
@@ -223,11 +228,18 @@ class _CreateState extends State<Task> {
               fontFamily: 'f1')) ,
             ),
             ),
-            
-          ],
-        ),
-      ),
-      )
-    ]);
+                ],
+              ),
+            ),
+                      ],),
+                    ),
+                    
+                  )
+
+              ],
+            ),
+
+          ),
+        );    
   }
 }
