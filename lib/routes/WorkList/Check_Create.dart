@@ -9,7 +9,7 @@ class Check extends StatefulWidget{
 }
 
 class _CheckState extends State<Check> {
-  bool checked = false;
+  bool _checked = false;
   List<int> selectedList = [];
 
   @override
@@ -80,7 +80,60 @@ class _CheckState extends State<Check> {
                   
                   SizedBox(
                     height: 20,
-                  ),  
+                  ), 
+                  CheckboxListTile(
+                    title: Text('List Item 1', style: TextStyle(fontSize: 16,)),
+                    controlAffinity: ListTileControlAffinity.leading,
+                    value: _checked, 
+                    onChanged: ( value){
+                      setState(() {
+                        _checked = value!;
+                      });
+                    }),
+                    CheckboxListTile(
+                    title: Text('List Item 2', style: TextStyle(fontSize: 16,)),
+                    controlAffinity: ListTileControlAffinity.leading,
+                    value: _checked, 
+                    onChanged: ( value){
+                      setState(() {
+                        _checked = value!;
+                      });
+                    }),
+                    CheckboxListTile(
+                    title: Text('List Item 3', style: TextStyle(fontSize: 16,)),
+                    controlAffinity: ListTileControlAffinity.leading,
+                    value: _checked, 
+                    onChanged: ( value){
+                      setState(() {
+                        _checked = value!;
+                      });
+                    }),
+                    CheckboxListTile(
+                    title: Text('List Item 4', style: TextStyle(fontSize: 16,)),
+                    controlAffinity: ListTileControlAffinity.leading,
+                    value: _checked, 
+                    onChanged: ( value){
+                      setState(() {
+                        _checked = value!;
+                      });
+                    }),
+                    CheckboxListTile(
+                    title: Text('List Item 5', style: TextStyle(fontSize: 16,)),
+                    controlAffinity: ListTileControlAffinity.leading,
+                    value: _checked, 
+                    onChanged: ( value){
+                      setState(() {
+                        _checked = value!;
+                      });
+                    }),
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      child: InkWell(
+                        onTap: (){},
+                        child: Text('+ Add new item', style: TextStyle(fontFamily: 'f1', fontSize: 16,),
+                      ),),
+                    ),
+
                  
                   Text(
                     'Choose Color',

@@ -23,6 +23,7 @@ class _Tab1State extends State<Tab1> {
   DateTime selectedDay = DateTime.now();
   DateTime focusedDay = DateTime.now();
   String taskPop = 'close';
+  
 
   get onPressed => null;
 
@@ -118,10 +119,12 @@ class _Tab1State extends State<Tab1> {
                           Colors.blue, 'Meeting with someone', '9:00 AM'),
                       taskWidget(
                           Colors.green, 'Take your medicines', '9:00 AM'),
+                    
                     ],
                   ),
                 ),
               ),
+              
               Container(
                   height: 110,
                   child: Stack(
