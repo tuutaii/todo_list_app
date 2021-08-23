@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_list_app/auth_bloc.dart';
 import 'package:todo_list_app/routes/Sign_In/Forgot_Pass.dart';
-import 'package:todo_list_app/routes/Walkthrough/getstarted.dart';
+import 'package:todo_list_app/routes/Sign_In/Success.dart';
+import 'package:todo_list_app/routes/Walkthrough/Get_Started.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage();
@@ -11,7 +13,18 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  
+  AuthBloc authBloc = new AuthBloc();
+
+  TextEditingController _userController = new TextEditingController();
+  TextEditingController _passController = new TextEditingController();
+
   @override
+  void dispose() {
+    authBloc.dispose();
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -52,12 +65,21 @@ class _LoginPageState extends State<LoginPage> {
                 fontSize: 20,
               ),
             ),
-            TextField(
-              decoration: InputDecoration(
-                border: UnderlineInputBorder(),
-                hintText: 'tuutaii194@gmail.com',
+            Container(
+                child: StreamBuilder(
+              stream: authBloc.userStream,
+              builder: (context, snapshot) => TextField(
+                keyboardType: TextInputType.emailAddress,
+                controller: _userController,
+                decoration: InputDecoration(
+                  
+                  border: UnderlineInputBorder(),
+                  hintText: 'tuutaii194@gmail.com',
+                  errorText:
+                      snapshot.hasError ? snapshot.error.toString() : null,
+                ),
               ),
-            ),
+            )),
             SizedBox(
               height: 40,
             ),
@@ -68,12 +90,20 @@ class _LoginPageState extends State<LoginPage> {
                 fontSize: 20,
               ),
             ),
-            TextField(
-              decoration: InputDecoration(
-                border: UnderlineInputBorder(),
-                hintText: 'Enter your password',
+            Container(
+                child: StreamBuilder(
+              stream: authBloc.passStream,
+              builder: (context, snapshot) => TextField(
+                obscureText: true,
+                controller: _passController,
+                decoration: InputDecoration(
+                  border: UnderlineInputBorder(),
+                  hintText: 'Enter your password',
+                  errorText:
+                      snapshot.hasError ? snapshot.error.toString() : null,
+                ),
               ),
-            ),
+            )),
             SizedBox(
               height: 10,
             ),
@@ -100,10 +130,13 @@ class _LoginPageState extends State<LoginPage> {
                       minimumSize: Size(300, 50),
                       backgroundColor: Colors.red,
                       alignment: Alignment.center),
-                  child: Text(
-                    'Log In',
-                    style: TextStyle(
-                        fontFamily: 'f1', fontSize: 18, color: Colors.white),
+                  child: InkWell(
+                    onTap: loginclicked,
+                    child: Text(
+                      'Log In',
+                      style: TextStyle(
+                          fontFamily: 'f1', fontSize: 18, color: Colors.white),
+                    ),
                   ),
                 ),
               ),
@@ -117,7 +150,19 @@ class _LoginPageState extends State<LoginPage> {
   void openForgotPassword() {
     Navigator.push(context, MaterialPageRoute(builder: (context) => Forgot()));
   }
-   void openGetstarted() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Onboarding()));
+
+  void openGetstarted() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => Onboarding()));
+  }
+
+  void loginclicked() async {
+    setState(() {
+      var isValid =
+          authBloc.isVaild(_userController.text, _passController.text);
+      if (isValid) {
+        Navigator.push(context, MaterialPageRoute(builder: (context)=> Success()));
+      }
+    });
   }
 }

@@ -3,7 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'getstarted.dart';
+import 'Get_Started.dart';
 
 class Screen1 extends StatefulWidget {
   const Screen1();

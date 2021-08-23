@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list_app/routes/WorkList/Check_Create.dart';
-import 'package:todo_list_app/routes/WorkList/WorkList.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:todo_list_app/routes/WorkList/Profiles.dart';
 
 
 
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
 
-
-
-
-
-
-void main() {
   runApp(MyApp());
 }
 
@@ -20,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(fontFamily: '1'),
-      home: Tab1(),
+      home: Profiles(),
     );
   }
 }
