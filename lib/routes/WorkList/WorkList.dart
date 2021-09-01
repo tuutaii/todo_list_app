@@ -1,9 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-
-import 'package:todo_list_app/widgets/Bottom_Bar.dart';
-
 import 'package:todo_list_app/widgets/Calendar.dart';
 
 class Tab1 extends StatefulWidget {
@@ -30,11 +27,76 @@ class _Tab1State extends State<Tab1> {
                 elevation: 0,
                 title: Text(
                   'Work List',
-                  style: TextStyle(fontFamily: 'f1', fontSize: 20),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 actions: [
+                  //Butotn
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Dialog(
+                                insetPadding: EdgeInsets.only(bottom: 700),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5)),
+                                child: SizedBox(
+                                  height: 130,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        SizedBox(
+                                          height: 1,
+                                        ),
+                                        InkWell(
+                                          onTap: () {},
+                                          child: Container(
+                                            child: Text(
+                                              'Incomplete Tasks',
+                                              style: TextStyle(
+                                                  fontSize: 17,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ),
+                                        InkWell(
+                                          onTap: () {},
+                                          child: Container(
+                                            child: Text(
+                                              'Completed Tasks',
+                                              style: TextStyle(
+                                                  fontSize: 17,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ),
+                                        InkWell(
+                                          onTap: () {},
+                                          child: Container(
+                                            child: Text(
+                                              'All Tasks',
+                                              style: TextStyle(
+                                                  fontSize: 17,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 1,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            });
+                      },
                       icon: Icon(Icons.sort_outlined),
                       color: Colors.white,
                       iconSize: 30)
@@ -49,7 +111,8 @@ class _Tab1State extends State<Tab1> {
                       // text: 'Today',
                       child: Text(
                         'Today',
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 18,
+                        ),
                       ),
                     ),
                     Tab(
@@ -69,23 +132,12 @@ class _Tab1State extends State<Tab1> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           taskWidget(
-                              Colors.red, 'Me eting with someone', '9:00 AM'),
+                              Colors.red, 'Meeting with someone', '9:00am'),
                           taskWidget(
-                              Colors.blue, 'Meeting with someone', '9:00 AM'),
+                              Colors.blue, 'Meeting with someone', '9:00am'),
                           taskWidget(
-                              Colors.green, 'Take your medicines', '9:00 AM'),
-                              taskWidget(
-                              Colors.green, 'Take your medicines', '9:00 AM'),
-                              taskWidget(
-                              Colors.green, 'Take your medicines', '9:00 AM'),
-                              taskWidget(
-                              Colors.green, 'Take your medicines', '9:00 AM'),
-                              taskWidget(
-                              Colors.green, 'Take your medicines', '9:00 AM'),
-                              taskWidget(
-                              Colors.green, 'Take your medicines', '9:00 AM'),
-                              taskWidget(
-                              Colors.green, 'Take your medicines', '9:00 AM'),
+                              Colors.green, 'Take your medicines', '9:00am'),
+                          
                         ],
                       ),
                     ),
@@ -95,7 +147,7 @@ class _Tab1State extends State<Tab1> {
               ),
             ),
           ),
-          Positioned(bottom: 0, left: 0, right: 0, child: Bar())
+          // Positioned(bottom: 0, left: 0, right: 0, child: Bar())
         ],
       ),
     );
@@ -105,7 +157,7 @@ class _Tab1State extends State<Tab1> {
     return Slidable(
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.3,
-      child: Container( 
+      child: Container(
           height: 80,
           margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           decoration: BoxDecoration(color: Colors.white, boxShadow: [
@@ -135,7 +187,7 @@ class _Tab1State extends State<Tab1> {
                 children: [
                   Text(title,
                       style: TextStyle(
-                          fontSize: 18, fontFamily: 'f1', color: Colors.black)),
+                          fontSize: 18, fontWeight: FontWeight.bold ,color: Colors.black)),
                   Text(
                     time,
                     style: TextStyle(

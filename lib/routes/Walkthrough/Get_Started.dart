@@ -74,7 +74,8 @@ class _OnboardingState extends State<Onboarding> {
                             ]),
                         child: Text(
                           'Get Started',
-                          style: TextStyle(fontFamily: 'f1', fontSize: 16),
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
@@ -82,9 +83,11 @@ class _OnboardingState extends State<Onboarding> {
                       height: 30,
                     ),
                     Text(
-                      'Login',
+                      'Log In',
                       style: TextStyle(
-                          fontSize: 18, color: Colors.white, fontFamily: 'f1'),
+                          fontSize: 18,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
                     )
                   ],
                 ),
@@ -128,7 +131,7 @@ class _OnboardingState extends State<Onboarding> {
           padding: EdgeInsets.symmetric(vertical: 10),
           child: Text(
             title,
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
         ),
         Container(
@@ -136,8 +139,6 @@ class _OnboardingState extends State<Onboarding> {
           child: Text(
             data,
             style: TextStyle(
-              color: Colors.grey,
-              fontFamily: 'f1',
               fontSize: 18,
             ),
           ),

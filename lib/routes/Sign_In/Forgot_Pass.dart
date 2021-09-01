@@ -35,20 +35,21 @@ class _ForgotState extends State<Forgot> {
                 padding: const EdgeInsets.fromLTRB(0, 60, 0, 0),
                 child: Text(
                   'Forgot Password',
-                  style: TextStyle(fontFamily: 'f1', fontSize: 30),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                 ),
               ),
+              SizedBox(height: 10,),
               Text(
                 'Please enter your email below to recevie your password reset instructions',
                 style: TextStyle(
-                    fontSize: 15, fontFamily: 'f1', color: Colors.grey),
+                    fontSize: 16, color: Colors.grey),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 60, 0, 0),
                 child: Text(
                   'Username',
                   style: TextStyle(
-                    fontFamily: 'f1',
+                    fontWeight: FontWeight.bold,
                     fontSize: 20,
                   ),
                 ),
@@ -72,12 +73,12 @@ class _ForgotState extends State<Forgot> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)),
                             minimumSize: Size(300, 50),
-                            backgroundColor: Colors.red,
+                            backgroundColor: Color(0xffF96060),
                             alignment: Alignment.center),
                         child: Text(
                           'Send Request',
                           style: TextStyle(
-                              fontFamily: 'f1',
+                              fontWeight: FontWeight.bold,
                               fontSize: 18,
                               color: Colors.white),
                         ),

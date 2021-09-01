@@ -1,11 +1,12 @@
-import 'dart:html';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_list_app/routes/WorkList/Check_Create.dart';
 import 'package:todo_list_app/routes/WorkList/Note_Create.dart';
+import 'package:todo_list_app/routes/WorkList/Profiles.dart';
 import 'package:todo_list_app/routes/WorkList/Project.dart';
+import 'package:todo_list_app/routes/WorkList/Quick.dart';
 import 'package:todo_list_app/routes/WorkList/Task_Create.dart';
+import 'package:todo_list_app/routes/WorkList/WorkList.dart';
 
 class Bar extends StatefulWidget {
   Bar({Key? key}) : super(key: key);
@@ -18,124 +19,136 @@ class Bar extends StatefulWidget {
 
 class Bartab extends State<Bar> {
   int _selectedIndex = 0;
-  void _onItemTapped(int index){
+  List<Widget> pagelist = <Widget>[
+    Tab1(),
+    Project(),
+    Quick(),
+    Profiles(),
+  ];
+
+  void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 60,
+      // height: 60,
       child: Scaffold(
-        
+        body: pagelist[_selectedIndex],
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
-      
-          backgroundColor: Colors.red,
-          onPressed: (){
+          backgroundColor: Colors.red, 
+          onPressed: () {
             showDialog(
-            context: context, 
-            builder: (BuildContext context){
-              return Dialog(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0)
-                ) ,
-                child: SizedBox(
-                  height: 214,
-                  width: 268,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                              SizedBox(
-                                height: 1,
+                context: context,
+                builder: (BuildContext context) {
+                  return Dialog(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0)),
+                    child: SizedBox(
+                      height: 214,
+                      width: 268,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          SizedBox(
+                            height: 1,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Task()));
+                            },
+                            child: Container(
+                              child: Text(
+                                'Add Task',
+                                style:
+                                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                               ),
-                              InkWell(
-                                onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => Task()));},
-                                child: Container(
-                                  child: Text(
-                                    'Add Task',
-                                    style: TextStyle(
-                                        fontSize: 18, fontFamily: 'f1'),
-                                  ),
-                                ),
+                            ),
+                          ),
+                          Container(
+                            height: 1,
+                            margin: EdgeInsets.symmetric(horizontal: 30),
+                            color: Colors.black.withOpacity(0.2),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Note()));
+                            },
+                            child: Container(
+                              child: Text(
+                                'Add Quick Note',
+                                style:
+                                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                               ),
-                              Container(
-                                height: 1,
-                                margin: EdgeInsets.symmetric(horizontal: 30),
-                                color: Colors.black.withOpacity(0.2),
+                            ),
+                          ),
+                          Container(
+                            height: 1,
+                            margin: EdgeInsets.symmetric(horizontal: 30),
+                            color: Colors.black.withOpacity(0.2),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Check()));
+                            },
+                            child: Container(
+                              child: Text(
+                                'Add Checklist',
+                                style:
+                                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                               ),
-                              InkWell(
-                                onTap: (){
-                                   Navigator.push(context, MaterialPageRoute(builder: (context) => Note()));
-                                },
-                                child: Container(
-                                  child: Text(
-                                    'Add Quick Note',
-                                    style: TextStyle(
-                                        fontSize: 18, fontFamily: 'f1'),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                height: 1,
-                                margin: EdgeInsets.symmetric(horizontal: 30),
-                                color: Colors.black.withOpacity(0.2),
-                              ),
-                              InkWell(
-                                onTap: (){
-                                   Navigator.push(context, MaterialPageRoute(builder: (context) => Check()));
-                                },
-                                child: Container(
-                                  child: Text(
-                                    'Add Checklist',
-                                    style: TextStyle(
-                                        fontSize: 18, fontFamily: 'f1'),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 1,
-                              ),
-                             
-                            ],
-                  ),
-                ),
-              );
-              
-            });
+                            ),
+                          ),
+                          SizedBox(
+                            height: 1,
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                });
           },
         ),
         bottomNavigationBar: SizedBox(
           height: 60,
+          width: MediaQuery.of(context).size.width,
           child: BottomNavigationBar(
             backgroundColor: Color(0xff292343),
             type: BottomNavigationBarType.fixed,
             items: [
               BottomNavigationBarItem(
-                
-                icon: Icon( Icons.check_circle,),
+                icon: Icon(
+                  Icons.check_circle,
+                ),
                 label: 'My Task',
-                
               ),
               BottomNavigationBarItem(
-                icon: Icon( Icons.menu,),
+                icon: Icon(
+                  Icons.menu,
+                ),
                 label: 'Menu',
-             
               ),
               BottomNavigationBarItem(
-                icon: Icon( Icons.content_paste),
+                icon: Icon(Icons.content_paste),
                 label: 'Quick',
-              
               ),
               BottomNavigationBarItem(
-                icon: Icon( Icons.account_circle),
+                icon: Icon(Icons.account_circle),
                 label: 'Profile',
-               
               ),
             ],
             currentIndex: _selectedIndex,
@@ -150,20 +163,9 @@ class Bartab extends State<Bar> {
                 fontSize: 12,
                 fontWeight: FontWeight.bold),
             onTap: _onItemTapped,
-          
-
           ),
-        
-          
         ),
-        
       ),
-      
-      
     );
-    
-
   }
-
-  
 }

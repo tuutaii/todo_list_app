@@ -48,12 +48,12 @@ class _LoginPageState extends State<LoginPage> {
             ),
             Text(
               'Welcome back!',
-              style: TextStyle(fontFamily: 'f1', fontSize: 32),
+              style: TextStyle(fontSize: 32),
             ),
             Text(
               'Sign in to continue',
               style:
-                  TextStyle(fontSize: 16, fontFamily: 'f1', color: Colors.grey),
+                  TextStyle(fontSize: 16, color: Colors.grey),
             ),
             SizedBox(
               height: 20,
@@ -61,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
             Text(
               'Username',
               style: TextStyle(
-                fontFamily: 'f1',
+                fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
             ),
@@ -86,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
             Text(
               'Password',
               style: TextStyle(
-                fontFamily: 'f1',
+                fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
             ),
@@ -114,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                   onTap: openForgotPassword,
                   child: Text(
                     'Forgot Password?',
-                    style: TextStyle(fontSize: 18, fontFamily: 'f1'),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 )
               ],
@@ -128,14 +128,14 @@ class _LoginPageState extends State<LoginPage> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
                       minimumSize: Size(300, 50),
-                      backgroundColor: Colors.red,
+                      backgroundColor: Color(0xffF96060),
                       alignment: Alignment.center),
                   child: InkWell(
                     onTap: loginclicked,
                     child: Text(
                       'Log In',
                       style: TextStyle(
-                          fontFamily: 'f1', fontSize: 18, color: Colors.white),
+                          fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white),
                     ),
                   ),
                 ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:todo_list_app/routes/WorkList/Profiles.dart';
 
+import 'package:todo_list_app/widgets/Bottom_Bar.dart';
 
 
 void main() async {
@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(fontFamily: '1'),
-      home: Profiles(),
+      theme: ThemeData(fontFamily: 'f1'),
+      home: Bar(),
     );
   }
 }

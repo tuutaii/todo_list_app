@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_list_app/widgets/Bottom_Bar.dart';
 
-import 'WorkList.dart';
-
 class Note extends StatefulWidget {
   const Note();
 
@@ -19,12 +17,12 @@ class _NoteState extends State<Note> {
         leading: IconButton(
             onPressed: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Tab1()));
+                  context, MaterialPageRoute(builder: (context) => Bar()));
             },
             icon: Icon(Icons.west)),
         title: Text(
-          'New Note',
-          style: TextStyle(fontFamily: 'f1', fontSize: 20),
+          'Add Note',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),
         backgroundColor: Color(0xFFF96060),
         centerTitle: true,
@@ -39,12 +37,19 @@ class _NoteState extends State<Note> {
               color: Color(0xFFF96060),
             ),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 30),
+              margin: EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.black.withOpacity(0.05),
+                        offset: Offset(10, 10),
+                        blurRadius: 4,
+                        spreadRadius: 1)
+                  ],
                   borderRadius: BorderRadius.all(Radius.circular(7)),
                   color: Colors.white),
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.86,
+              height: 500,
               child: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -58,68 +63,46 @@ class _NoteState extends State<Note> {
                         children: [
                           Text(
                             'Description',
-                            style: TextStyle(fontSize: 18, fontFamily: 'f1'),
+                            style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
                             height: 10,
                           ),
+                          //Box decription
                           Container(
                             height: 150,
                             width: double.infinity,
                             decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(15),
-                                    topLeft: Radius.circular(15)),
+                                borderRadius: BorderRadius.circular(5),
                                 border: Border.all(
                                     color: Colors.grey.withOpacity(0.5))),
-                            child: TextField(
-                              maxLines: 6,
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: 'Add description here',
-                              ),
-                              style: TextStyle(
-                                fontSize: 18,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: TextField(
+                                maxLines: 6,
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'Add description here',
+                                ),
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
                               ),
                             ),
                           ),
-                          Container(
-                            height: 50,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                                color: Colors.grey.withOpacity(0.2),
-                                borderRadius: BorderRadius.only(
-                                    bottomRight: Radius.circular(15),
-                                    bottomLeft: Radius.circular(15)),
-                                border: Border.all(
-                                  color: Colors.grey.withOpacity(0.5),
-                                )),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Container(
-                                  child: IconButton(
-                                    icon: Icon(
-                                      Icons.attach_file,
-                                      color: Colors.grey,
-                                    ),
-                                    onPressed: () {},
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
+                          
                           SizedBox(
                             height: 20,
                           ),
                           Text(
                             'Choose Color',
-                            style: TextStyle(fontSize: 18, fontFamily: 'f1'),
+                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
                             height: 20,
                           ),
+                          // Colors
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
@@ -173,6 +156,7 @@ class _NoteState extends State<Note> {
                       ),
                     ),
                     SizedBox(height: 20),
+                    //Button
                     Container(
                       padding: EdgeInsets.symmetric(vertical: 15),
                       width: 300,
@@ -185,14 +169,25 @@ class _NoteState extends State<Note> {
                             style: TextStyle(
                                 fontSize: 18,
                                 color: Colors.white,
-                                fontFamily: 'f1')),
+                                fontWeight: FontWeight.bold)),
                       ),
                     ),
                   ],
                 ),
               ),
             ),
-            Positioned(bottom: 0, left: 0, right: 0, child: Bar())
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                height: 60,
+                color: Color(0xff292E4E),
+              ))
+
+            
+            
+            // Positioned(bottom: 0, left: 0, right: 0, child: Bar())
           ],
         ),
       ),

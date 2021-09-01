@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_list_app/widgets/Bottom_Bar.dart';
+
 
 class Project extends StatefulWidget {
   const Project({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class _ProjectState extends State<Project> {
           title: Text(
             'Projects',
             style:
-                TextStyle(fontFamily: 'f1', fontSize: 20, color: Colors.black),
+                TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
           ),
         ),
         body: Stack(children: [
@@ -33,6 +33,7 @@ class _ProjectState extends State<Project> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
+                  //Personal
                   SizedBox(
                     height: 180,
                     width: 165,
@@ -64,18 +65,30 @@ class _ProjectState extends State<Project> {
                                     width: 6,
                                   )),
                             ),
-                            SizedBox(height: 52,),
+                            SizedBox(
+                              height: 46,
+                            ),
                             Text(
                               'Personal',
-                              style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,fontFamily: 'f1'),
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'f1'),
                             ),
-                            SizedBox(height: 16,),
-
+                            SizedBox(
+                              height: 16,
+                            ),
+                            Text(
+                              '10 Tasks',
+                              style:
+                                  TextStyle(fontSize: 16, color: Colors.grey),
+                            )
                           ],
                         ),
                       ),
                     ),
                   ),
+                  //Teamworks
                   SizedBox(
                     height: 180,
                     width: 165,
@@ -107,13 +120,24 @@ class _ProjectState extends State<Project> {
                                     width: 6,
                                   )),
                             ),
-                            SizedBox(height: 52,),
+                            SizedBox(
+                              height: 46,
+                            ),
                             Text(
                               'Teamworks',
-                              style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,fontFamily: 'f1'),
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'f1'),
                             ),
-                            SizedBox(height: 16,),
-
+                            SizedBox(
+                              height: 16,
+                            ),
+                            Text(
+                              '5 Tasks',
+                              style:
+                                  TextStyle(fontSize: 16, color: Colors.grey),
+                            )
                           ],
                         ),
                       ),
@@ -127,6 +151,7 @@ class _ProjectState extends State<Project> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
+                  //Home
                   SizedBox(
                     height: 180,
                     width: 165,
@@ -158,18 +183,30 @@ class _ProjectState extends State<Project> {
                                     width: 6,
                                   )),
                             ),
-                            SizedBox(height: 52,),
+                            SizedBox(
+                              height: 46,
+                            ),
                             Text(
                               'Home',
-                              style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,fontFamily: 'f1'),
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'f1'),
                             ),
-                            SizedBox(height: 16,),
-
+                            SizedBox(
+                              height: 16,
+                            ),
+                            Text(
+                              '10 Tasks',
+                              style:
+                                  TextStyle(fontSize: 16, color: Colors.grey),
+                            )
                           ],
                         ),
                       ),
                     ),
                   ),
+                  //Meet
                   SizedBox(
                     height: 180,
                     width: 165,
@@ -201,13 +238,24 @@ class _ProjectState extends State<Project> {
                                     width: 6,
                                   )),
                             ),
-                            SizedBox(height: 52,),
+                            SizedBox(
+                              height: 46,
+                            ),
                             Text(
                               'Meet',
-                              style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,fontFamily: 'f1'),
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'f1'),
                             ),
-                            SizedBox(height: 16,),
-
+                            SizedBox(
+                              height: 16,
+                            ),
+                            Text(
+                              '10 Tasks',
+                              style:
+                                  TextStyle(fontSize: 16, color: Colors.grey),
+                            )
                           ],
                         ),
                       ),
@@ -215,6 +263,7 @@ class _ProjectState extends State<Project> {
                   ),
                 ],
               ),
+              //Button
               Padding(
                 padding: const EdgeInsets.all(20),
                 child: InkWell(
@@ -243,9 +292,7 @@ class _ProjectState extends State<Project> {
               ),
             ],
           ),
-          Positioned(bottom: 0, left: 0, right: 0, child: Bar())
-        ]
-        )
-        );
+          // Positioned(bottom: 0, left: 0, right: 0, child: Bar())
+        ]));
   }
 }

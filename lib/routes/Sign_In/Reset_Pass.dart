@@ -35,20 +35,23 @@ class _ResetState extends State<Reset> {
                 padding: const EdgeInsets.fromLTRB(0, 60, 0, 0),
                 child: Text(
                   'Reset Password',
-                  style: TextStyle(fontFamily: 'f1', fontSize: 30),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                 ),
+              ),
+              SizedBox(
+                height: 10,
               ),
               Text(
                 'Reset code was sent to your email. Please enter ther code anh create new password',
                 style: TextStyle(
-                    fontSize: 15, fontFamily: 'f1', color: Colors.grey),
+                    fontSize: 16, fontFamily: 'f1', color: Colors.grey),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 60, 0, 0),
                 child: Text(
                   'Reset code',
                   style: TextStyle(
-                    fontFamily: 'f1',
+                    fontWeight: FontWeight.bold,
                     fontSize: 20,
                   ),
                 ),
@@ -64,7 +67,7 @@ class _ResetState extends State<Reset> {
                 child: Text(
                   'New password',
                   style: TextStyle(
-                    fontFamily: 'f1',
+                    fontWeight: FontWeight.bold,
                     fontSize: 20,
                   ),
                 ),
@@ -80,7 +83,7 @@ class _ResetState extends State<Reset> {
                 child: Text(
                   'Confirm password',
                   style: TextStyle(
-                    fontFamily: 'f1',
+                    fontWeight: FontWeight.bold,
                     fontSize: 20,
                   ),
                 ),
@@ -91,40 +94,43 @@ class _ResetState extends State<Reset> {
                   hintText: 'Enter your confirm password',
                 ),
               ),
-              SizedBox(height: 40,),
-             
-               Center(
-                 child: InkWell(
-                   onTap: openSuccess,
-                   child: Container(
-                      child: TextButton(
-                        onPressed: openSuccess,
-                        style: TextButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            minimumSize: Size(300, 50),
-                            backgroundColor: Colors.red,
-                            alignment: Alignment.center),
-                        child: Text(
-                          'Change password',
-                          style: TextStyle(
-                              fontFamily: 'f1', fontSize: 18, color: Colors.white),
-                        ),
+              SizedBox(
+                height: 60,
+              ),
+              Center(
+                child: InkWell(
+                  onTap: openSuccess,
+                  child: Container(
+                    child: TextButton(
+                      onPressed: openSuccess,
+                      style: TextButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          minimumSize: Size(300, 50),
+                          backgroundColor: Color(0xffF96060),
+                          alignment: Alignment.center),
+                      child: Text(
+                        'Change password',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                            color: Colors.white),
                       ),
                     ),
-                 ),
-               ),
-              
+                  ),
+                ),
+              ),
             ],
           ),
         ),
       ),
     );
   }
-  void openSuccess (){
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>Success()));
 
+  void openSuccess() {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Success()));
   }
+
   void openForgotPassword() {
     Navigator.push(context, MaterialPageRoute(builder: (context) => Forgot()));
   }

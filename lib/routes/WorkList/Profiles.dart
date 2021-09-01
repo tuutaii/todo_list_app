@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class Profiles extends StatefulWidget {
   const Profiles({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class _ProfilesState extends State<Profiles> {
           title: Text(
             'Profiles',
             style:
-                TextStyle(fontFamily: 'f1', fontSize: 20, color: Colors.black),
+                TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
           ),
         ),
         body: Stack(children: [
@@ -28,6 +29,7 @@ class _ProfilesState extends State<Profiles> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Profiles//
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
                   height: 190,
@@ -137,6 +139,7 @@ class _ProfilesState extends State<Profiles> {
                   ),
                 ),
                 SizedBox(height: 30),
+                //Scroll ngang//
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
@@ -157,6 +160,17 @@ class _ProfilesState extends State<Profiles> {
                                       blurRadius: 20,
                                       spreadRadius: 1)
                                 ]),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(27),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Text('Events',style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
+                                      Text('12 Tasks',style: TextStyle(fontSize: 14,color: Colors.white),)
+                                    ],
+                                  ),
+                                ),
                           )),
                       SizedBox(
                         width: 10,
@@ -176,6 +190,17 @@ class _ProfilesState extends State<Profiles> {
                                       blurRadius: 20,
                                       spreadRadius: 1)
                                 ]),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(27),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Text('To do Task',style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
+                                      Text('12 Tasks',style: TextStyle(fontSize: 14,color: Colors.white),)
+                                    ],
+                                  ),
+                                ),
                           )),
                       SizedBox(
                         width: 10,
@@ -195,6 +220,17 @@ class _ProfilesState extends State<Profiles> {
                                       blurRadius: 20,
                                       spreadRadius: 1)
                                 ]),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(27),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Text('Events',style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
+                                      Text('12 Task',style: TextStyle(fontSize: 14,color: Colors.white),)
+                                    ],
+                                  ),
+                                ),
                           )),
                     ],
                   ),
@@ -202,6 +238,7 @@ class _ProfilesState extends State<Profiles> {
                 SizedBox(
                   height: 30,
                 ),
+                //Static//
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
                   height: 205,
@@ -238,18 +275,15 @@ class _ProfilesState extends State<Profiles> {
                             children: [
                               Column(
                                 children: [
-                                  Container(
-                                    height: 80,
-                                    width: 80,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                          color: Colors.grey,
-                                          width: 1,
-                                        )),
-                                        child: Center(child: Text('60%', style: TextStyle(fontSize:18, fontWeight:FontWeight.bold,)),)
-                                  ),
+                                  CircularPercentIndicator(
+                                    animation: true,
+                                    animationDuration: 1200,
+                                    radius: 80,
+                                    lineWidth: 5,
+                                    percent: 0.6,
+                                    center:  Text('60%'),
+                                    progressColor: Colors.red,),
+                                  
                                   SizedBox(
                                     height: 10,
                                   ),
@@ -262,18 +296,14 @@ class _ProfilesState extends State<Profiles> {
                               ),
                               Column(
                                 children: [
-                                  Container(
-                                    height: 80,
-                                    width: 80,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                          color: Colors.grey,
-                                          width: 1,
-                                        )),
-                                        child: Center(child: Text('40%', style: TextStyle(fontSize:18, fontWeight:FontWeight.bold,)),)
-                                  ),
+                                  CircularPercentIndicator(
+                                    animation: true,
+                                    animationDuration: 1200,
+                                    radius: 80,
+                                    lineWidth: 5,
+                                    percent: 0.4,
+                                    center:  Text('40%'),
+                                    progressColor: Colors.blue,),
                                   SizedBox(
                                     height: 10,
                                   ),
@@ -286,18 +316,14 @@ class _ProfilesState extends State<Profiles> {
                               ),
                               Column(
                                 children: [
-                                  Container(
-                                    height: 80,
-                                    width: 80,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                          color: Colors.grey,
-                                          width: 1,
-                                        )),
-                                        child: Center(child: Text('80%', style: TextStyle(fontSize:18, fontWeight:FontWeight.bold,)),)
-                                  ),
+                                  CircularPercentIndicator(
+                                    animation: true,
+                                    animationDuration: 1200,
+                                    radius: 80,
+                                    lineWidth: 5,
+                                    percent: 0.8,
+                                    center:  Text('80%'),
+                                    progressColor: Colors.green,),
                                   SizedBox(
                                     height: 10,
                                   ),

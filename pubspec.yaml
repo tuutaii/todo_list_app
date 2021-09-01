@@ -28,7 +28,10 @@ dependencies:
   table_calendar: ^3.0.1
   flutter_slidable: ^0.6.0
   firebase_core: 
-    segmented_circle_border: ^2.0.1
+  percent_indicator: ^3.0.1
+  intl: ^0.17.0
+  
+
   
     
   
@@ -73,7 +76,7 @@ flutter:
   fonts:
     - family: f1
       fonts:
-        - asset: assets/fonts/Flamante-Round-Book-FFP.ttf
+        - asset: assets/fonts/AvenirNextRoundedPro-Reg.ttf
 
   #
   # For details regarding fonts from package dependencies,
