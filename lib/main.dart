@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-
-import 'package:todo_list_app/widgets/Bottom_Bar.dart';
+import 'package:todo_list_app/routes/Sign_In/register.dart';
+import 'package:todo_list_app/routes/Walkthrough/Home.dart';
 
 
 void main() async {
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(fontFamily: 'f1'),
-      home: Bar(),
+      home: Register(),
     );
   }
 }

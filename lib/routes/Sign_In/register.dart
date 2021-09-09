@@ -1,20 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_list_app/routes/Sign_In/Forgot_Pass.dart';
-import 'package:todo_list_app/routes/Walkthrough/Home.dart';
-import 'package:todo_list_app/widgets/Bottom_Bar.dart';
+import 'package:todo_list_app/routes/Sign_In/Login.dart';
 import 'package:todo_list_app/widgets/fire_base.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage();
+class Register extends StatefulWidget {
+  const Register();
 
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  TextEditingController _userController = new TextEditingController();
-  TextEditingController _passController = new TextEditingController();
+class _LoginPageState extends State<Register> {
+  final TextEditingController _userController = TextEditingController();
+  final TextEditingController _passController = TextEditingController();
 
   bool isloading = false;
 
@@ -27,8 +25,7 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Colors.transparent,
         leading: IconButton(
             onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Screen1()));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginPage()));
             },
             icon: Icon(
               Icons.west,
@@ -44,11 +41,11 @@ class _LoginPageState extends State<LoginPage> {
               height: 20,
             ),
             Text(
-              'Welcome back!',
+              'Create a account !',
               style: TextStyle(fontSize: 32),
             ),
             Text(
-              'Sign in to continue',
+              'Please enter all the fileds',
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
             SizedBox(
@@ -62,8 +59,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             Container(
-              child: TextFormField(
-                
+              child: TextField(
                 keyboardType: TextInputType.emailAddress,
                 controller: _userController,
                 decoration: InputDecoration(
@@ -95,69 +91,49 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
               height: 10,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                InkWell(
-                  onTap: openForgotPassword,
-                  child: Text(
-                    'Forgot Password?',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                )
-              ],
-            ),
             Padding(
               padding: const EdgeInsets.fromLTRB(50, 80, 50, 0),
               child: SizedBox(
                 child: TextButton(
-                  onPressed: () {
-                    
+                  onPressed: () async {
+                    if (_userController.text.isNotEmpty &&
+                        _passController.text.isNotEmpty) {
                       setState(() {
                         isloading = true;
                       });
-                      if (_userController.text.isNotEmpty &&
-                          _passController.text.isNotEmpty) {
-                        setState(() {
-                          
-                          isloading = true;  
-                        });
-                        logIn(_userController.text, _passController.text)
-                            .then((user) {
-                          if (user != null) {
-                            print("Login Sucessfull");
-                            setState(() {
-                              isloading = false;
-                            });
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Bar()));
-                          } else {
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: Text('User not found'),
-                                  );
-                                });
-                            setState(() {
-                              isloading = false;
-                            });
-                          }
-                        });
-                      } else {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Text('Please enter all Fields'),
-                              );
-                            });
-                        setState(() {
-                          isloading = false;
-                        });
-                      }
+                      createAccount(
+                              _userController.text.trim(), _passController.text)
+                          .then((user) {
+                        if (user != null) {
+                          setState(() {
+                            isloading = false;
+                          });
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (_) => LoginPage()));
+                          print("Account Created Sucessfull");
+                        } else {
+                          print("Login Failed");
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Center(child: Text('Error')),
+                                );
+                              });
+                          setState(() {
+                            isloading = false;
+                          });
+                        }
+                      });
+                    } else {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text('Please enter all Fields'),
+                            );
+                          });
+                    }
                   },
                   style: TextButton.styleFrom(
                       shape: RoundedRectangleBorder(
@@ -168,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: InkWell(
                     onTap: () {},
                     child: Text(
-                      'Log In',
+                      'Register',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -182,9 +158,5 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
-  }
-
-  void openForgotPassword() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Forgot()));
   }
 }

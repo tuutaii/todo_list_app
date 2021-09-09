@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:todo_list_app/widgets/Calendar.dart';
+import 'package:todo_list_app/widgets/fire_base.dart';
 
 class Tab1 extends StatefulWidget {
   const Tab1();
@@ -22,9 +23,19 @@ class _Tab1State extends State<Tab1> {
             length: 2,
             child: Scaffold(
               appBar: AppBar(
+                automaticallyImplyLeading: false,
                 centerTitle: true,
                 backgroundColor: Color(0xFFF96060),
                 elevation: 0,
+                leading: IconButton(
+                  onPressed: () {
+                    logOut(context);
+                  },
+                  icon: Icon(
+                    Icons.logout_outlined,
+                    color: Colors.white,
+                  ),
+                ),
                 title: Text(
                   'Work List',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
@@ -111,7 +122,8 @@ class _Tab1State extends State<Tab1> {
                       // text: 'Today',
                       child: Text(
                         'Today',
-                        style: TextStyle(fontSize: 18,
+                        style: TextStyle(
+                          fontSize: 18,
                         ),
                       ),
                     ),
@@ -137,7 +149,6 @@ class _Tab1State extends State<Tab1> {
                               Colors.blue, 'Meeting with someone', '9:00am'),
                           taskWidget(
                               Colors.green, 'Take your medicines', '9:00am'),
-                          
                         ],
                       ),
                     ),
@@ -187,7 +198,9 @@ class _Tab1State extends State<Tab1> {
                 children: [
                   Text(title,
                       style: TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold ,color: Colors.black)),
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black)),
                   Text(
                     time,
                     style: TextStyle(
