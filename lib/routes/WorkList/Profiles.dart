@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:todo_list_app/widgets/fire_base.dart';
 
 class Profiles extends StatefulWidget {
   const Profiles({Key? key}) : super(key: key);
@@ -10,17 +13,54 @@ class Profiles extends StatefulWidget {
 }
 
 class _ProfilesState extends State<Profiles> {
+  String uid = '', _email = '';
+
+  void loadID() {
+    if (uid == '')
+      setState(() {
+        print("Set IDDD");
+        uid = FirebaseAuth.instance.currentUser!.uid;
+      });
+  }
+
+  void loadData() {
+    if (uid != '') {
+      FirebaseFirestore.instance.collection('users').doc(uid).get().then(
+        (DocumentSnapshot documentSnapshot) {
+          if (documentSnapshot.exists) {
+            setState(() {
+              Map<String, dynamic> data =
+                  documentSnapshot.data() as Map<String, dynamic>;
+              _email = data['email'];
+            });
+          }
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    loadID();
+    loadData();
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
           centerTitle: true,
           elevation: 0,
+          leading: IconButton(
+            onPressed: () {
+              logOut(context);
+            },
+            icon: Icon(
+              Icons.logout_outlined,
+              color: Colors.black,
+            ),
+          ),
           title: Text(
             'Profiles',
-            style:
-                TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
           ),
         ),
         body: Stack(children: [
@@ -57,13 +97,7 @@ class _ProfilesState extends State<Profiles> {
                                 Container(
                                   height: 64,
                                   width: 64,
-                                  decoration: BoxDecoration(
-                                      color: Colors.blue,
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                        color: Color(0xffDBDDEF),
-                                        width: 6,
-                                      )),
+                                  child: Image.asset('assets/images/bts.png'),
                                 ),
                                 SizedBox(
                                   width: 10,
@@ -71,8 +105,17 @@ class _ProfilesState extends State<Profiles> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text('Stepphen Chow',style: TextStyle(fontSize: 18, fontFamily: 'f1'),),
-                                    Text('hungmn@devera.vn',style: TextStyle(fontSize: 16, fontFamily: 'f1', color: Colors.grey))
+                                    Text(
+                                      'Stepphen Chow',
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    Text('$_email',
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontFamily: 'f1',
+                                            color: Colors.grey))
                                   ],
                                 ),
                               ],
@@ -160,17 +203,26 @@ class _ProfilesState extends State<Profiles> {
                                       blurRadius: 20,
                                       spreadRadius: 1)
                                 ]),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(27),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Text('Events',style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
-                                      Text('12 Tasks',style: TextStyle(fontSize: 14,color: Colors.white),)
-                                    ],
-                                  ),
-                                ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(27),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text('Events',
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold)),
+                                  Text(
+                                    '12 Tasks',
+                                    style: TextStyle(
+                                        fontSize: 14, color: Colors.white),
+                                  )
+                                ],
+                              ),
+                            ),
                           )),
                       SizedBox(
                         width: 10,
@@ -190,17 +242,26 @@ class _ProfilesState extends State<Profiles> {
                                       blurRadius: 20,
                                       spreadRadius: 1)
                                 ]),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(27),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Text('To do Task',style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
-                                      Text('12 Tasks',style: TextStyle(fontSize: 14,color: Colors.white),)
-                                    ],
-                                  ),
-                                ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(27),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text('To do Task',
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold)),
+                                  Text(
+                                    '12 Tasks',
+                                    style: TextStyle(
+                                        fontSize: 14, color: Colors.white),
+                                  )
+                                ],
+                              ),
+                            ),
                           )),
                       SizedBox(
                         width: 10,
@@ -220,17 +281,26 @@ class _ProfilesState extends State<Profiles> {
                                       blurRadius: 20,
                                       spreadRadius: 1)
                                 ]),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(27),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Text('Events',style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
-                                      Text('12 Task',style: TextStyle(fontSize: 14,color: Colors.white),)
-                                    ],
-                                  ),
-                                ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(27),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text('Events',
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold)),
+                                  Text(
+                                    '12 Task',
+                                    style: TextStyle(
+                                        fontSize: 14, color: Colors.white),
+                                  )
+                                ],
+                              ),
+                            ),
                           )),
                     ],
                   ),
@@ -281,9 +351,9 @@ class _ProfilesState extends State<Profiles> {
                                     radius: 80,
                                     lineWidth: 5,
                                     percent: 0.6,
-                                    center:  Text('60%'),
-                                    progressColor: Colors.red,),
-                                  
+                                    center: Text('60%'),
+                                    progressColor: Colors.red,
+                                  ),
                                   SizedBox(
                                     height: 10,
                                   ),
@@ -302,8 +372,9 @@ class _ProfilesState extends State<Profiles> {
                                     radius: 80,
                                     lineWidth: 5,
                                     percent: 0.4,
-                                    center:  Text('40%'),
-                                    progressColor: Colors.blue,),
+                                    center: Text('40%'),
+                                    progressColor: Colors.blue,
+                                  ),
                                   SizedBox(
                                     height: 10,
                                   ),
@@ -322,8 +393,9 @@ class _ProfilesState extends State<Profiles> {
                                     radius: 80,
                                     lineWidth: 5,
                                     percent: 0.8,
-                                    center:  Text('80%'),
-                                    progressColor: Colors.green,),
+                                    center: Text('80%'),
+                                    progressColor: Colors.green,
+                                  ),
                                   SizedBox(
                                     height: 10,
                                   ),

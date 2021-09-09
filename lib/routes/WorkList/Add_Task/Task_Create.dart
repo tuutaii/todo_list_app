@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:todo_list_app/widgets/Bottom_Bar.dart';
+import 'package:todo_list_app/routes/WorkList/HomeScreen/Home_Screen.dart';
 
 class Task extends StatefulWidget {
   const Task();
@@ -307,7 +307,6 @@ class _CreateState extends State<Task> {
   }
 
   Future pickDate(BuildContext context) async {
-    final initialDate = DateTime.now();
     final newDate = await showDatePicker(
       context: context,
       initialDate: _date,

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_list_app/routes/Sign_In/Success.dart';
+import 'package:todo_list_app/widgets/password_field.dart';
+import 'package:todo_list_app/widgets/text_field.dart';
 import 'Forgot_Pass.dart';
 
 class Reset extends StatefulWidget {
@@ -11,10 +12,25 @@ class Reset extends StatefulWidget {
 }
 
 class _ResetState extends State<Reset> {
+  final TextEditingController _userController = TextEditingController();
+  final TextEditingController _passrController = TextEditingController();
+  final TextEditingController _confirmpassController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+          onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>Forgot()));
+          },
+          icon: Icon(Icons.west, color: Colors.black, size: 30,),
+        ),
+      ),
       body: SafeArea(
         child: Container(
           constraints: BoxConstraints.expand(),
@@ -22,15 +38,6 @@ class _ResetState extends State<Reset> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              SizedBox(
-                height: 10,
-              ),
-              IconButton(
-                  onPressed: openForgotPassword,
-                  icon: Icon(
-                    Icons.west,
-                    size: 40,
-                  )),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 60, 0, 0),
                 child: Text(
@@ -56,12 +63,8 @@ class _ResetState extends State<Reset> {
                   ),
                 ),
               ),
-              TextField(
-                decoration: InputDecoration(
-                  border: UnderlineInputBorder(),
-                  hintText: 'Enter your number',
-                ),
-              ),
+              TextFieldWidget(
+                  text: "Enter your code", controller: _userController),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
                 child: Text(
@@ -72,12 +75,7 @@ class _ResetState extends State<Reset> {
                   ),
                 ),
               ),
-              TextField(
-                decoration: InputDecoration(
-                  border: UnderlineInputBorder(),
-                  hintText: 'Enter your password',
-                ),
-              ),
+              PasswordFieldWidget(pass: "Enter your password", controller: _passrController,),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
                 child: Text(
@@ -88,21 +86,13 @@ class _ResetState extends State<Reset> {
                   ),
                 ),
               ),
-              TextField(
-                decoration: InputDecoration(
-                  border: UnderlineInputBorder(),
-                  hintText: 'Enter your confirm password',
-                ),
-              ),
+              PasswordFieldWidget(controller: _confirmpassController, pass: "Enter your confirm password",),
               SizedBox(
                 height: 60,
               ),
               Center(
-                child: InkWell(
-                  onTap: openSuccess,
-                  child: Container(
-                    child: TextButton(
-                      onPressed: openSuccess,
+                child: TextButton(
+                      onPressed: () {},
                       style: TextButton.styleFrom(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
@@ -117,21 +107,11 @@ class _ResetState extends State<Reset> {
                             color: Colors.white),
                       ),
                     ),
-                  ),
-                ),
-              ),
+                  ), 
             ],
           ),
         ),
       ),
     );
-  }
-
-  void openSuccess() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Success()));
-  }
-
-  void openForgotPassword() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Forgot()));
   }
 }

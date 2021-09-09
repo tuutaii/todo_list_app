@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_list_app/routes/Sign_In/Login.dart';
 import 'package:todo_list_app/widgets/fire_base.dart';
+import 'package:todo_list_app/widgets/password_field.dart';
+import 'package:todo_list_app/widgets/text_field.dart';
 
 class Register extends StatefulWidget {
   const Register();
@@ -13,6 +15,7 @@ class Register extends StatefulWidget {
 class _LoginPageState extends State<Register> {
   final TextEditingController _userController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
+  final TextEditingController _confirmpassController = TextEditingController();
 
   bool isloading = false;
 
@@ -25,7 +28,8 @@ class _LoginPageState extends State<Register> {
         backgroundColor: Colors.transparent,
         leading: IconButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => LoginPage()));
             },
             icon: Icon(
               Icons.west,
@@ -42,7 +46,7 @@ class _LoginPageState extends State<Register> {
             ),
             Text(
               'Create a account !',
-              style: TextStyle(fontSize: 32),
+              style: TextStyle(fontSize: 32, fontWeight: FontWeight.w900),
             ),
             Text(
               'Please enter all the fileds',
@@ -59,15 +63,8 @@ class _LoginPageState extends State<Register> {
               ),
             ),
             Container(
-              child: TextField(
-                keyboardType: TextInputType.emailAddress,
-                controller: _userController,
-                decoration: InputDecoration(
-                  border: UnderlineInputBorder(),
-                  hintText: 'tuutaii194@gmail.com',
-                ),
-              ),
-            ),
+                child: TextFieldWidget(
+                    text: "Enter your email..", controller: _userController)),
             SizedBox(
               height: 40,
             ),
@@ -79,17 +76,23 @@ class _LoginPageState extends State<Register> {
               ),
             ),
             Container(
-              child: TextField(
-                obscureText: true,
-                controller: _passController,
-                decoration: InputDecoration(
-                  border: UnderlineInputBorder(),
-                  hintText: 'Enter your password',
-                ),
+                child: PasswordFieldWidget(
+              controller: _passController,
+              pass: "Enter your password..",
+            )),
+            SizedBox(
+              height: 40,
+            ),
+            Text(
+              'Confirm Password',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
               ),
             ),
-            SizedBox(
-              height: 10,
+            PasswordFieldWidget(
+              controller: _confirmpassController,
+              pass: "Enter your password again",
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(50, 80, 50, 0),
@@ -97,7 +100,8 @@ class _LoginPageState extends State<Register> {
                 child: TextButton(
                   onPressed: () async {
                     if (_userController.text.isNotEmpty &&
-                        _passController.text.isNotEmpty) {
+                        _passController.text.isNotEmpty &&
+                        _passController.text == _confirmpassController.text) {
                       setState(() {
                         isloading = true;
                       });

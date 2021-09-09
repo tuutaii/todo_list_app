@@ -16,7 +16,7 @@ class _Screen1State extends State<Screen1> {
   
   @override
  void initState() {
-   Timer(Duration(seconds: 5), openOnBoard);
+   Timer(Duration(seconds: 3), openOnBoard);
 
   super.initState();    
   // DO YOUR STUFF
@@ -34,8 +34,8 @@ class _Screen1State extends State<Screen1> {
                   style: TextStyle(
                   color: Colors.black,
                   shadows: [Shadow(
-                    blurRadius: 20,
-                    offset: Offset(0,10),
+                    blurRadius: 30,
+                    offset: Offset(3,4),
                     color: Colors.black.withOpacity(0.5)) 
                   ], 
                   fontWeight: FontWeight.bold,

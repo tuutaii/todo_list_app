@@ -101,7 +101,7 @@ class _OnboardingState extends State<Onboarding> {
     return AnimatedContainer(
       duration: Duration(milliseconds: 100),
       height: 10,
-      width: (currentPage == pageNo) ? 20 : 10,
+      width: (currentPage == pageNo) ? 10 : 10,
       margin: EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(5)),

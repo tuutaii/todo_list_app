@@ -1,11 +1,11 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:todo_list_app/routes/WorkList/Check_Create.dart';
-import 'package:todo_list_app/routes/WorkList/Note_Create.dart';
+import 'package:todo_list_app/routes/WorkList/Add_CheckList/Check_Create.dart';
+import 'package:todo_list_app/routes/WorkList/Add_Note/Note_Create.dart';
 import 'package:todo_list_app/routes/WorkList/Profiles.dart';
 import 'package:todo_list_app/routes/WorkList/Project.dart';
 import 'package:todo_list_app/routes/WorkList/Quick.dart';
-import 'package:todo_list_app/routes/WorkList/Task_Create.dart';
+import 'package:todo_list_app/routes/WorkList/Add_Task/Task_Create.dart';
 import 'package:todo_list_app/routes/WorkList/WorkList.dart';
 
 class Bar extends StatefulWidget {
@@ -41,7 +41,7 @@ class Bartab extends State<Bar> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
-          backgroundColor: Colors.red, 
+          backgroundColor: Colors.red,
           onPressed: () {
             showDialog(
                 context: context,
@@ -68,8 +68,8 @@ class Bartab extends State<Bar> {
                             child: Container(
                               child: Text(
                                 'Add Task',
-                                style:
-                                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
@@ -88,8 +88,8 @@ class Bartab extends State<Bar> {
                             child: Container(
                               child: Text(
                                 'Add Quick Note',
-                                style:
-                                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
@@ -108,8 +108,8 @@ class Bartab extends State<Bar> {
                             child: Container(
                               child: Text(
                                 'Add Checklist',
-                                style:
-                                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),

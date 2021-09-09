@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_list_app/widgets/Bottom_Bar.dart';
+import 'package:todo_list_app/routes/WorkList/HomeScreen/Home_Screen.dart';
 
 class Success extends StatefulWidget {
   const Success();
@@ -13,7 +13,7 @@ class Success extends StatefulWidget {
 class _SuccessState extends State<Success> {
   @override
   void initState() {
-    Timer(Duration(seconds: 5), openTab);
+    Timer(Duration(seconds: 3), openTab);
 
     super.initState();
     // DO YOUR STUFF
@@ -35,9 +35,7 @@ class _SuccessState extends State<Success> {
               padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
               child: Text(
                 'Succesful!',
-                style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
             ),
             Padding(

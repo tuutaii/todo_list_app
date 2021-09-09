@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_list_app/routes/Sign_In/Forgot_Pass.dart';
+import 'package:todo_list_app/routes/Sign_In/Success.dart';
+import 'package:todo_list_app/routes/Sign_In/register.dart';
 import 'package:todo_list_app/routes/Walkthrough/Home.dart';
-import 'package:todo_list_app/widgets/Bottom_Bar.dart';
 import 'package:todo_list_app/widgets/fire_base.dart';
+import 'package:todo_list_app/widgets/password_field.dart';
+import 'package:todo_list_app/widgets/text_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage();
@@ -19,6 +22,12 @@ class _LoginPageState extends State<LoginPage> {
   bool isloading = false;
 
   @override
+  void dispose() {
+    _userController.dispose();
+    _passController.dispose();
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -45,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             Text(
               'Welcome back!',
-              style: TextStyle(fontSize: 32),
+              style: TextStyle(fontSize: 32, fontWeight: FontWeight.w900),
             ),
             Text(
               'Sign in to continue',
@@ -62,16 +71,8 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             Container(
-              child: TextFormField(
-                
-                keyboardType: TextInputType.emailAddress,
-                controller: _userController,
-                decoration: InputDecoration(
-                  border: UnderlineInputBorder(),
-                  hintText: 'tuutaii194@gmail.com',
-                ),
-              ),
-            ),
+                child: TextFieldWidget(
+                    text: "Enter your email..", controller: _userController)),
             SizedBox(
               height: 40,
             ),
@@ -83,15 +84,10 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             Container(
-              child: TextField(
-                obscureText: true,
-                controller: _passController,
-                decoration: InputDecoration(
-                  border: UnderlineInputBorder(),
-                  hintText: 'Enter your password',
-                ),
-              ),
-            ),
+                child: PasswordFieldWidget(
+              pass: 'Enter your password..',
+              controller: _passController,
+            )),
             SizedBox(
               height: 10,
             ),
@@ -99,7 +95,10 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 InkWell(
-                  onTap: openForgotPassword,
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Forgot()));
+                  },
                   child: Text(
                     'Forgot Password?',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -112,52 +111,48 @@ class _LoginPageState extends State<LoginPage> {
               child: SizedBox(
                 child: TextButton(
                   onPressed: () {
-                    
+                    setState(() {
+                      isloading = true;
+                    });
+                    if (_userController.text.isNotEmpty &&
+                        _passController.text.isNotEmpty) {
                       setState(() {
                         isloading = true;
                       });
-                      if (_userController.text.isNotEmpty &&
-                          _passController.text.isNotEmpty) {
-                        setState(() {
-                          
-                          isloading = true;  
-                        });
-                        logIn(_userController.text, _passController.text)
-                            .then((user) {
-                          if (user != null) {
-                            print("Login Sucessfull");
-                            setState(() {
-                              isloading = false;
-                            });
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Bar()));
-                          } else {
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: Text('User not found'),
-                                  );
-                                });
-                            setState(() {
-                              isloading = false;
-                            });
-                          }
-                        });
-                      } else {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Text('Please enter all Fields'),
-                              );
-                            });
-                        setState(() {
-                          isloading = false;
-                        });
-                      }
+                      logIn(_userController.text, _passController.text)
+                          .then((user) {
+                        if (user != null) {
+                          print("Login Sucessfull");
+                          setState(() {
+                            isloading = false;
+                          });
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => Success()));
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('User not found'),
+                                );
+                              });
+                          setState(() {
+                            isloading = false;
+                          });
+                        }
+                      });
+                    } else {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text('Please enter all Fields'),
+                            );
+                          });
+                      setState(() {
+                        isloading = false;
+                      });
+                    }
                   },
                   style: TextButton.styleFrom(
                       shape: RoundedRectangleBorder(
@@ -178,13 +173,32 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Dont't have an account?",
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black)),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Register()));
+                  },
+                  child: Text(
+                    'Sign Up',
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xff347AF0)),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
     );
-  }
-
-  void openForgotPassword() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Forgot()));
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_list_app/widgets/Bottom_Bar.dart';
+import 'package:todo_list_app/routes/WorkList/HomeScreen/Home_Screen.dart';
 
 class Note extends StatefulWidget {
   const Note();
@@ -63,7 +63,8 @@ class _NoteState extends State<Note> {
                         children: [
                           Text(
                             'Description',
-                            style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
                             height: 10,
@@ -91,13 +92,14 @@ class _NoteState extends State<Note> {
                               ),
                             ),
                           ),
-                          
+
                           SizedBox(
                             height: 20,
                           ),
                           Text(
                             'Choose Color',
-                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
                             height: 20,
@@ -177,16 +179,14 @@ class _NoteState extends State<Note> {
               ),
             ),
             Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                height: 60,
-                color: Color(0xff292E4E),
-              ))
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  height: 60,
+                  color: Color(0xff292E4E),
+                ))
 
-            
-            
             // Positioned(bottom: 0, left: 0, right: 0, child: Bar())
           ],
         ),
