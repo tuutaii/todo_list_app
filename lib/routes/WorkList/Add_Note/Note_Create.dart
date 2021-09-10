@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_list_app/routes/WorkList/HomeScreen/Home_Screen.dart';
+import 'package:todo_list_app/routes/WorkList/Add_Note/Widget/add_note_firebase.dart';
+import 'package:todo_list_app/widgets/PickColor.dart';
 
 class Note extends StatefulWidget {
   const Note();
@@ -10,6 +12,9 @@ class Note extends StatefulWidget {
 }
 
 class _NoteState extends State<Note> {
+  final TextEditingController _contentController = TextEditingController();
+  int _color = 0xFF6074F9;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,6 +86,7 @@ class _NoteState extends State<Note> {
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: TextField(
+                                controller: _contentController,
                                 maxLines: 6,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
@@ -104,53 +110,14 @@ class _NoteState extends State<Note> {
                           SizedBox(
                             height: 20,
                           ),
-                          // Colors
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    color: Color(0xFF6074F9)),
-                              ),
-                              Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
-                                  color: Color(0xFFE42B6A),
-                                ),
-                              ),
-                              Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    color: Color(0xFF5ABB56)),
-                              ),
-                              Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    color: Color(0xFF3D3A62)),
-                              ),
-                              Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    color: Color(0xFFF4CA8F)),
-                              )
-                            ],
+                          Container(
+                            child: ColorPicker(onSelectColor: (value) {
+                              setState(() {
+                                _color = value;
+                              });
+                            }),
                           ),
+
                           SizedBox(
                             height: 20,
                           ),
@@ -161,17 +128,15 @@ class _NoteState extends State<Note> {
                     //Button
                     Container(
                       padding: EdgeInsets.symmetric(vertical: 15),
+                      height: 80,
                       width: 300,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(15)),
                         color: Color(0xFFF96060),
                       ),
                       child: Center(
-                        child: Text('Done',
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold)),
+                        child:
+                            AddNote(_contentController.text, _color),
                       ),
                     ),
                   ],
@@ -186,8 +151,6 @@ class _NoteState extends State<Note> {
                   height: 60,
                   color: Color(0xff292E4E),
                 ))
-
-            // Positioned(bottom: 0, left: 0, right: 0, child: Bar())
           ],
         ),
       ),

@@ -114,6 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                     setState(() {
                       isloading = true;
                     });
+                      print(_userController.text + _passController.text);           
                     if (_userController.text.isNotEmpty &&
                         _passController.text.isNotEmpty) {
                       setState(() {
@@ -126,8 +127,10 @@ class _LoginPageState extends State<LoginPage> {
                           setState(() {
                             isloading = false;
                           });
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Success()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Success()));
                         } else {
                           showDialog(
                               context: context,
@@ -160,15 +163,12 @@ class _LoginPageState extends State<LoginPage> {
                       minimumSize: Size(300, 50),
                       backgroundColor: Color(0xffF96060),
                       alignment: Alignment.center),
-                  child: InkWell(
-                    onTap: () {},
-                    child: Text(
-                      'Log In',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: Colors.white),
-                    ),
+                  child: Text(
+                    'Log In',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        color: Colors.white),
                   ),
                 ),
               ),

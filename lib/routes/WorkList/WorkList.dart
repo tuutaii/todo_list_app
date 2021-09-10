@@ -26,7 +26,6 @@ class _Tab1State extends State<Tab1> {
                 centerTitle: true,
                 backgroundColor: Color(0xFFF96060),
                 elevation: 0,
-                
                 title: Text(
                   'Work List',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
@@ -129,20 +128,22 @@ class _Tab1State extends State<Tab1> {
               ),
               body: TabBarView(
                 children: [
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          taskWidget(
-                              Colors.red, 'Meeting with someone', '9:00am'),
-                          taskWidget(
-                              Colors.blue, 'Meeting with someone', '9:00am'),
-                          taskWidget(
-                              Colors.green, 'Take your medicines', '9:00am'),
-                        ],
+                  Column(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            taskWidget(
+                                Colors.red, 'Meeting with someone', '9:00am'),
+                            taskWidget(
+                                Colors.blue, 'Meeting with someone', '9:00am'),
+                            taskWidget(
+                                Colors.green, 'Take your medicines', '9:00am'),
+                          ],
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                   Calendar(),
                 ],

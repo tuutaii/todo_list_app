@@ -47,7 +47,6 @@ Future<User?> logIn(String email, String password) async {
   }
 }
 
-
 Future logOut(BuildContext context) async {
   FirebaseAuth _auth = FirebaseAuth.instance;
   try {
@@ -58,3 +57,4 @@ Future logOut(BuildContext context) async {
     print("error");
   }
 }
+
