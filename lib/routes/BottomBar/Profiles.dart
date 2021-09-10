@@ -18,7 +18,6 @@ class _ProfilesState extends State<Profiles> {
   void loadID() {
     if (uid == '')
       setState(() {
-        print("Set IDDD");
         uid = FirebaseAuth.instance.currentUser!.uid;
       });
   }

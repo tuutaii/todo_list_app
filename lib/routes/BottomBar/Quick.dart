@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 class Quick extends StatefulWidget {
   const Quick({Key? key}) : super(key: key);
 
@@ -12,12 +11,10 @@ class Quick extends StatefulWidget {
 }
 
 class _QuickState extends State<Quick> {
-
   List<int> selectedList = [];
+
   @override
   Widget build(BuildContext context) {
-    // loadID();
-    // loadData();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -56,7 +53,7 @@ class _QuickState extends State<Quick> {
                           child: Container(
                             decoration: BoxDecoration(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(3)),
+                                    BorderRadius.all(Radius.circular(10)),
                                 color: Colors.white,
                                 boxShadow: [
                                   BoxShadow(
@@ -73,7 +70,7 @@ class _QuickState extends State<Quick> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
-                                      height: 3,
+                                      height: 5,
                                       width: 121,
                                       color: Color(document['color'])),
                                   Padding(
@@ -82,7 +79,8 @@ class _QuickState extends State<Quick> {
                                     child: Text(
                                       document['content'],
                                       style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 18,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),

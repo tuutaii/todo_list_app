@@ -18,7 +18,7 @@ class AddNote extends StatelessWidget {
       // Call the user's CollectionReference to add a new user
       users
           .add({
-            'content': content, 
+            'content': content.trim(), 
             'color': color, 
           })
           .then((value) => print("Note Added"))

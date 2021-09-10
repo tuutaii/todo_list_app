@@ -1,12 +1,13 @@
 
 import 'package:flutter/material.dart';
+import 'package:todo_list_app/routes/BottomBar/Profiles.dart';
+import 'package:todo_list_app/routes/BottomBar/Project.dart';
+import 'package:todo_list_app/routes/BottomBar/Quick.dart';
+import 'package:todo_list_app/routes/BottomBar/WorkList.dart';
 import 'package:todo_list_app/routes/WorkList/Add_CheckList/Check_Create.dart';
 import 'package:todo_list_app/routes/WorkList/Add_Note/Note_Create.dart';
-import 'package:todo_list_app/routes/WorkList/Profiles.dart';
-import 'package:todo_list_app/routes/WorkList/Project.dart';
-import 'package:todo_list_app/routes/WorkList/Quick.dart';
 import 'package:todo_list_app/routes/WorkList/Add_Task/Task_Create.dart';
-import 'package:todo_list_app/routes/WorkList/WorkList.dart';
+
 
 class Bar extends StatefulWidget {
   Bar({Key? key}) : super(key: key);
@@ -60,6 +61,7 @@ class Bartab extends State<Bar> {
                           ),
                           InkWell(
                             onTap: () {
+                              Navigator.pop(context);
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -80,6 +82,7 @@ class Bartab extends State<Bar> {
                           ),
                           InkWell(
                             onTap: () {
+                              Navigator.pop(context);
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -100,6 +103,7 @@ class Bartab extends State<Bar> {
                           ),
                           InkWell(
                             onTap: () {
+                              Navigator.pop(context);
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(

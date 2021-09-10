@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:todo_list_app/routes/WorkList/Add_Task/Composnetn/description_text.dart';
+import 'package:todo_list_app/routes/WorkList/Add_Task/Composnetn/title_text.dart';
 import 'package:todo_list_app/routes/WorkList/HomeScreen/Home_Screen.dart';
 
 class Task extends StatefulWidget {
@@ -11,6 +12,9 @@ class Task extends StatefulWidget {
 }
 
 class _CreateState extends State<Task> {
+   TextEditingController _titleController = TextEditingController();
+  TextEditingController _descriptionController = TextEditingController();
+
   DateTime _date = DateTime.now();
 
   String getText() {
@@ -118,96 +122,8 @@ class _CreateState extends State<Task> {
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Container(
-                      height: 66,
-                      padding: EdgeInsets.all(10),
-                      color: Colors.grey.withOpacity(0.2),
-                      child: TextField(
-                        decoration: InputDecoration(
-                            hintText: 'Tittle',
-                            border: InputBorder.none,
-                            hintStyle: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontFamily: 'f1')),
-                        style: TextStyle(
-                          fontSize: 18,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    //Decription
-                    Container(
-                      padding: EdgeInsets.all(15),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Description',
-                            style: TextStyle(fontSize: 18, fontFamily: 'f1'),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            height: 150,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(5),
-                                    topLeft: Radius.circular(5)),
-                                border: Border.all(
-                                    color: Colors.grey.withOpacity(0.5))),
-                            child: TextField(
-                              maxLines: 6,
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintText: 'Add description here',
-                              ),
-                              style: TextStyle(
-                                fontSize: 18,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            height: 50,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                                color: Colors.grey.withOpacity(0.2),
-                                borderRadius: BorderRadius.only(
-                                    bottomRight: Radius.circular(5),
-                                    bottomLeft: Radius.circular(5)),
-                                border: Border.all(
-                                  color: Colors.grey.withOpacity(0.5),
-                                )),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Container(
-                                  child: IconButton(
-                                    icon: Icon(
-                                      Icons.attach_file,
-                                      color: Colors.grey,
-                                    ),
-                                    onPressed: () {},
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                        ],
-                      ),
-                    ),
-                    //Due Date
+                    Titletext(titlecontroller: _titleController),
+                    Descriptiontext(textcontroller: _descriptionController,),
                     Container(
                       height: 66,
                       width: MediaQuery.of(context).size.width,
