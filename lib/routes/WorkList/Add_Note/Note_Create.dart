@@ -126,19 +126,8 @@ class _NoteState extends State<Note> {
                     ),
                     SizedBox(height: 20),
                     //Button
-                    Container(
-                      padding: EdgeInsets.symmetric(vertical: 15),
-                      height: 80,
-                      width: 300,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(15)),
-                        color: Color(0xFFF96060),
-                      ),
-                      child: Center(
-                        child:
-                            AddNote(_contentController.text, _color),
-                      ),
-                    ),
+
+                    AddNote(_contentController.text, _color),
                   ],
                 ),
               ),

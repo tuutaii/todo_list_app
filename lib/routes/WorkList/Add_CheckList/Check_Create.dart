@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_list_app/routes/WorkList/Add_CheckList/Widget/addChecklist.dart';
 import 'package:todo_list_app/routes/WorkList/HomeScreen/Home_Screen.dart';
+import 'package:todo_list_app/widgets/PickColor.dart';
+
+import 'Widget/check_item.dart';
 
 class Check extends StatefulWidget {
   @override
@@ -8,7 +12,15 @@ class Check extends StatefulWidget {
 }
 
 class _CheckState extends State<Check> {
-  List<int> selectedList = [];
+  TextEditingController _descriptionController = TextEditingController();
+
+  int _color = 0xFF6074F9;
+
+   int indexCheckItem = 1;
+
+  List<TextEditingController> _listItemController = [
+    for (int i = 0; i < 10; i++) TextEditingController(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -72,89 +84,34 @@ class _CheckState extends State<Check> {
                             height: 10,
                           ),
                           // Content
-                          Text(
-                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                              style: TextStyle(
-                                fontSize: 16,
-                              )),
+                          TextFormField(
+                            controller: _descriptionController,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText:
+                                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                              hintStyle: TextStyle(),
+                            ),
+                          ),
+                          for (int i = 0; i < indexCheckItem; i++)
+                            CheckItem(
+                              index: i, 
+                              controller: _listItemController[i],
+                            ),
 
                           SizedBox(
                             height: 20,
-                          ),
-                          // List check
-                          CheckboxListTile(
-                            title: Text('List Item 1',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                )),
-                            controlAffinity: ListTileControlAffinity.leading,
-                            onChanged: (value) {
-                              setState(() {
-                                if (value == true) {
-                                  selectedList.add(2);
-                                } else {
-                                  selectedList.remove(2);
-                                }
-                              });
-                            },
-                            value: selectedList.contains(2),
-                          ),
-                          CheckboxListTile(
-                            title: Text('List Item 2',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                )),
-                            controlAffinity: ListTileControlAffinity.leading,
-                            onChanged: (value) {
-                              setState(() {
-                                if (value == true) {
-                                  selectedList.add(1);
-                                } else {
-                                  selectedList.remove(1);
-                                }
-                              });
-                            },
-                            value: selectedList.contains(1),
-                          ),
-                          CheckboxListTile(
-                            title: Text('List Item 3',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                )),
-                            controlAffinity: ListTileControlAffinity.leading,
-                            onChanged: (value) {
-                              setState(() {
-                                if (value == true) {
-                                  selectedList.add(3);
-                                } else {
-                                  selectedList.remove(3);
-                                }
-                              });
-                            },
-                            value: selectedList.contains(3),
-                          ),
-                          CheckboxListTile(
-                            title: Text('List Item 4',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                )),
-                            controlAffinity: ListTileControlAffinity.leading,
-                            onChanged: (value) {
-                              setState(() {
-                                if (value == true) {
-                                  selectedList.add(4);
-                                } else {
-                                  selectedList.remove(4);
-                                }
-                              });
-                            },
-                            value: selectedList.contains(4),
-                          ),
+                          ),                                        
                           //Add item
                           Container(
                             padding: EdgeInsets.all(20),
                             child: InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                setState(() {
+                                    if (indexCheckItem < 10)
+                                      indexCheckItem++;
+                                  });
+                              },
                               child: Text(
                                 '+ Add new item',
                                 style: TextStyle(
@@ -171,52 +128,13 @@ class _CheckState extends State<Check> {
                           SizedBox(
                             height: 20,
                           ),
-                          // COlors
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    color: Color(0xFF6074F9)),
-                              ),
-                              Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
-                                  color: Color(0xFFE42B6A),
-                                ),
-                              ),
-                              Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    color: Color(0xFF5ABB56)),
-                              ),
-                              Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    color: Color(0xFF3D3A62)),
-                              ),
-                              Container(
-                                height: 50,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    color: Color(0xFFF4CA8F)),
-                              )
-                            ],
+                          // Colors
+                          Container(
+                            child: ColorPicker(onSelectColor: (value) {
+                              setState(() {
+                                _color = value;
+                              });
+                            }),
                           ),
                           SizedBox(
                             height: 20,
@@ -226,21 +144,7 @@ class _CheckState extends State<Check> {
                     ),
                     SizedBox(height: 20),
                     // Button
-                    Container(
-                      padding: EdgeInsets.symmetric(vertical: 15),
-                      width: 300,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(15)),
-                        color: Color(0xFFF96060),
-                      ),
-                      child: Center(
-                        child: Text('Done',
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold)),
-                      ),
-                    ),
+                    Addcheck(_descriptionController.text.trim(), _color, indexCheckItem,_listItemController)
                   ],
                 ),
               ),

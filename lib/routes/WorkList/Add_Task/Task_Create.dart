@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:todo_list_app/routes/WorkList/Add_Task/Composnetn/description_text.dart';
-import 'package:todo_list_app/routes/WorkList/Add_Task/Composnetn/title_text.dart';
 import 'package:todo_list_app/routes/WorkList/HomeScreen/Home_Screen.dart';
+
+import 'Widget/addTask_firebase.dart';
+import 'Widget/description_text.dart';
+import 'Widget/title_text.dart';
 
 class Task extends StatefulWidget {
   const Task();
@@ -12,18 +15,43 @@ class Task extends StatefulWidget {
 }
 
 class _CreateState extends State<Task> {
-   TextEditingController _titleController = TextEditingController();
+  String link = '';
+  String _project = '', _projectID = '';
+
+  List<String> member = [];
+
+  TextEditingController _titleController = TextEditingController();
   TextEditingController _descriptionController = TextEditingController();
 
   DateTime _date = DateTime.now();
 
+  void addMember(String uidMember) {
+    setState(() {
+      member.add(uidMember);
+    });
+  }
+
+  void removeMember(String uidMember) {
+    setState(() {
+      member.remove(uidMember);
+    });
+  }
+
   String getText() {
+    // ignore: unnecessary_null_comparison
     if (_date == null) {
       return 'Anytime';
     } else {
       return DateFormat('dd/MM/yyyy').format(_date);
       // return '${date.month}/${date.day}/${date.year}';
     }
+  }
+
+  void setProjectValue(String title, String id) {
+    setState(() {
+      _project = title;
+      _projectID = id;
+    });
   }
 
   @override
@@ -89,12 +117,28 @@ class _CreateState extends State<Task> {
                                   BorderRadius.all(Radius.circular(40)),
                               color: Colors.grey.withOpacity(0.2),
                             ),
-                            child: TextField(
-                              textAlign: TextAlign.center,
-                              decoration: InputDecoration(
-                                hintText: 'Assignee',
-                                border: InputBorder.none,
-                              ),
+                            child: Row(
+                              children: [
+                                link != ''
+                                    ? CircleAvatar(
+                                        radius: 25,
+                                        backgroundImage: NetworkImage(
+                                          '$link',
+                                        ),
+                                      )
+                                    : CircleAvatar(
+                                        radius: 25,
+                                        backgroundImage:
+                                            AssetImage('assets/images/bts.png'),
+                                      ),
+                                SizedBox(width: 10),
+                                // Text(
+                                //   users!.displayName.toString().substring(0, 8),
+                                //   style: TextStyle(
+                                //     fontWeight: FontWeight.bold,
+                                //   ),
+                                // ),
+                              ],
                             ),
                           ),
                           SizedBox(
@@ -111,19 +155,26 @@ class _CreateState extends State<Task> {
                                   BorderRadius.all(Radius.circular(40)),
                               color: Colors.grey.withOpacity(0.2),
                             ),
-                            child: TextField(
-                              textAlign: TextAlign.center,
-                              decoration: InputDecoration(
-                                hintText: 'Project',
-                                border: InputBorder.none,
-                              ),
+                            child: InkWell(
+                              onTap: () {
+                                // openProjectDialog(user!, setProjectValue);
+                              },
+                              child: Center(
+                                  child: Text(
+                                _project == '' ? 'Project' : _project,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )),
                             ),
                           ),
                         ],
                       ),
                     ),
                     Titletext(titlecontroller: _titleController),
-                    Descriptiontext(textcontroller: _descriptionController,),
+                    Descriptiontext(
+                      textcontroller: _descriptionController,
+                    ),
                     Container(
                       height: 66,
                       width: MediaQuery.of(context).size.width,
@@ -160,7 +211,6 @@ class _CreateState extends State<Task> {
                         ],
                       ),
                     ),
-
                     Padding(
                       padding: EdgeInsets.all(15),
                       child: Column(
@@ -175,40 +225,110 @@ class _CreateState extends State<Task> {
                           SizedBox(
                             height: 20,
                           ),
-                          Container(
-                            height: 50,
-                            width: 100,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(40)),
-                              color: Colors.grey.withOpacity(0.2),
-                            ),
-                            child: TextField(
-                              textAlign: TextAlign.center,
-                              decoration: InputDecoration(
-                                hintText: 'Anyone',
-                                border: InputBorder.none,
-                              ),
+                          Padding(
+                            padding: const EdgeInsets.all(24),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Add Member',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    StreamBuilder(
+                                      stream: FirebaseFirestore.instance
+                                          .collection('users')
+                                          .snapshots(),
+                                      builder: (context,
+                                          AsyncSnapshot<QuerySnapshot>
+                                              snapshot) {
+                                        if (snapshot.hasData) {
+                                          List<QueryDocumentSnapshot<Object?>>
+                                              data = snapshot.data!.docs;
+                                          return Row(
+                                            children: [
+                                              for (int i = 0;
+                                                  i < data.length;
+                                                  i++)
+                                                if (member
+                                                    .contains(data[i]['uid']))
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                      horizontal: 5,
+                                                    ),
+                                                    child: Stack(
+                                                      children: [
+                                                        CircleAvatar(
+                                                          radius: 25,
+                                                          backgroundImage:
+                                                              NetworkImage(
+                                                            data[i]['avatar'],
+                                                          ),
+                                                        ),
+                                                        Positioned(
+                                                          top: 0,
+                                                          right: 0,
+                                                          child: InkWell(
+                                                            onTap: () =>
+                                                                removeMember(
+                                                                    data[i][
+                                                                        'uid']),
+                                                            child: Icon(
+                                                              Icons
+                                                                  .remove_circle,
+                                                              color: Colors.red,
+                                                            ),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                            ],
+                                          );
+                                        }
+                                        return Container(
+                                          color: Colors.white,
+                                          child: Center(
+                                            child: Image.asset(
+                                              "assets/images/bts.png",
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                    Container(
+                                      width: member.length == 0 ? 90 : 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                          color: Color(0xFFF4F4F4),
+                                          borderRadius:
+                                              BorderRadius.circular(40)),
+                                      child: InkWell(
+                                        onTap: () {
+                                          openMemberDialog(addMember, member);
+                                        },
+                                        child: Center(
+                                            child: Text(
+                                          member.length == 0 ? 'Anyone' : '+',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        )),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
                           SizedBox(height: 40),
-                          // Button
-                          Container(
-                            padding: EdgeInsets.symmetric(vertical: 15),
-                            width: 300,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
-                              color: Color(0xFFF96060),
-                            ),
-                            child: Center(
-                              child: Text('Add Task',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.white,
-                                      fontFamily: 'f1')),
-                            ),
-                          ),
+                          AddTask(_project, _projectID, _titleController,
+                              _descriptionController),
                         ],
                       ),
                     )
@@ -221,6 +341,118 @@ class _CreateState extends State<Task> {
       ),
     );
   }
+
+  Future<void> openMemberDialog(Function press, List<String> _listUser) async =>
+      await showDialog(
+        barrierColor: Colors.transparent,
+        context: context,
+        builder: (BuildContext context) {
+          return StreamBuilder(
+            stream: FirebaseFirestore.instance.collection('users').snapshots(),
+            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.hasData) {
+                List<QueryDocumentSnapshot<Object?>> data = snapshot.data!.docs;
+                return SimpleDialog(
+                  backgroundColor: Color(0xFFF4F4F4),
+                  contentPadding: EdgeInsets.all(0),
+                  children: [
+                    for (int i = 0; i < data.length; i++)
+                      if (!_listUser.contains(data[i]['uid']))
+                        SimpleDialogOption(
+                          child: Row(
+                            children: [
+                              data[i]['avatar'] != ''
+                                  ? CircleAvatar(
+                                      radius: 25,
+                                      backgroundImage: NetworkImage(
+                                        data[i]['avatar'],
+                                      ),
+                                    )
+                                  : CircleAvatar(
+                                      radius: 25,
+                                      backgroundImage: AssetImage(
+                                        "assets/images/bts.png",
+                                      ),
+                                    ),
+                              SizedBox(width: 20),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  
+                                  Text(data[i]['email']),
+                                ],
+                              ),
+                            ],
+                          ),
+                          onPressed: () {
+                            press(data[i]['uid']);
+                            Navigator.pop(context);
+                          },
+                        ),
+                  ],
+                );
+              }
+              return Container(
+                color: Colors.white,
+                child: Center(
+                  child: Image.asset("assets/images/bts.png"),
+                ),
+              );
+            },
+          );
+        },
+      );
+
+  // Future<void> openProjectDialog(User users, Function press) async =>
+  //     await showDialog(
+  //       barrierColor: Colors.transparent,
+  //       context: context,
+  //       builder: (BuildContext context) {
+  //         return StreamBuilder(
+  //           stream: FirebaseFirestore.instance
+  //               .collection('users')
+  //               .doc(users.uid)
+  //               .collection('project')
+  //               .snapshots(),
+  //           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+  //             if (snapshot.hasData) {
+  //               List<QueryDocumentSnapshot<Object?>> data = snapshot.data!.docs;
+  //               return SimpleDialog(
+  //                 backgroundColor: Color(0xFFF4F4F4),
+  //                 contentPadding: EdgeInsets.all(0),
+  //                 children: [
+  //                   for (int i = 0; i < data.length; i++)
+  //                     SimpleDialogOption(
+  //                       child: Padding(
+  //                         padding: const EdgeInsets.all(8.0),
+  //                         child: Text(
+  //                           data[i]['title'].toString(),
+  //                           style: TextStyle(
+  //                             fontSize: 19,
+  //                             fontWeight: FontWeight.w500,
+  //                           ),
+  //                         ),
+  //                       ),
+  //                       onPressed: () {
+  //                         press(data[i]['title'].toString(),
+  //                             data[i]['id'].toString());
+  //                         Navigator.pop(context);
+  //                       },
+  //                     ),
+  //                 ],
+  //               );
+  //             }
+  //             return Container(
+  //               color: Colors.white,
+  //               child: Center(
+  //                 child: Image.asset("assets/images/loader.gif"),
+  //               ),
+  //             );
+  //           },
+  //         );
+  //       },
+  //     );
 
   Future pickDate(BuildContext context) async {
     final newDate = await showDatePicker(

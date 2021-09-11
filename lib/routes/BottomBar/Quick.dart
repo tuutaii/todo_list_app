@@ -31,6 +31,7 @@ class _QuickState extends State<Quick> {
               .collection('users')
               .doc(FirebaseAuth.instance.currentUser!.uid)
               .collection('quick_note')
+              .orderBy('time')
               .snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -48,7 +49,6 @@ class _QuickState extends State<Quick> {
                     child: Column(
                       children: <Widget>[
                         SizedBox(
-                          height: 80,
                           width: MediaQuery.of(context).size.width,
                           child: Container(
                             decoration: BoxDecoration(
@@ -76,13 +76,54 @@ class _QuickState extends State<Quick> {
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 13),
-                                    child: Text(
-                                      document['content'],
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                    child: Column(
+                                      children: [
+                                        document['status'] == 0
+                                            ? Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(document['description'],
+                                                      style: TextStyle(
+                                                          fontSize: 16,
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                              FontWeight.bold)),
+                                                  for (int i = 0;
+                                                      i < document['length'];
+                                                      i++)
+                                                    CheckboxListTile(
+                                                      title: Text(
+                                                          document['item$i'],
+                                                          style: TextStyle(
+                                                            fontSize: 16,
+                                                          )),
+                                                      controlAffinity:
+                                                          ListTileControlAffinity
+                                                              .leading,
+                                                      onChanged: (value) {
+                                                        setState(() {
+                                                          if (value == true) {
+                                                            selectedList.add(i);
+                                                          } else {
+                                                            selectedList
+                                                                .remove(i);
+                                                          }
+                                                        });
+                                                      },
+                                                      value: selectedList
+                                                          .contains(i),
+                                                    ),
+                                                ],
+                                              )
+                                            : Text(
+                                                document["content"],
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                      ],
                                     ),
                                   )
                                 ],
