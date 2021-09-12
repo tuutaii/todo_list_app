@@ -1,9 +1,22 @@
 <h1>
         ToDo List App - Flutter
     </h1>
-     <h3>
-        Screen it contains:
+     
+ <h3>
+        My account test:
     </h3>
+    <ul>
+        <li>
+                Email: tai3@gmail.com
+        </li>
+        <li>
+                PassWord: 123456
+        </li>
+    </ul>
+    <h3>
+        All Screen :
+    </h3>
+    <hr>
     <ul>
         <li>
             Walkthrough Screen
@@ -39,6 +52,7 @@
      <h3>
         Package I Use:
     </h3>
+    <hr>
     <ul>
         <li>
             Firebase Auth
@@ -76,5 +90,6 @@
     <h4> New Task - Add Check List - Add Note Screen </h4>
     <hr>
     <img src="https://raw.githubusercontent.com/tuutaii/todo_list_app/main/P7.png" alt="">
+    <hr>
    
     
