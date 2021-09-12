@@ -5,6 +5,18 @@
         Screen it contains:
     </h3>
     <hr>
+     <h3>
+        My account test:
+    </h3>
+    <ul>
+        <li>
+                Email: tai3@gmail.com
+        </li>
+        <li>
+                PassWord: 123456
+        </li>
+        </ul>
+    <hr>
     <ul>
         <li>
             Walkthrough Screen
