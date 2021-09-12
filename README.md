@@ -15,7 +15,7 @@
             TAB :My Task (UI)
         </li>
         <li>
-            TAB: Menu (UI)
+            TAB: Menu
         </li>
         <li>
             TAB: Quick
