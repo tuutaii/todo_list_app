@@ -4,6 +4,7 @@
      <h3>
         Screen it contains:
     </h3>
+    <hr>
     <ul>
         <li>
             Walkthrough Screen
@@ -39,6 +40,7 @@
      <h3>
         Package I Use:
     </h3>
+    <hr>
     <ul>
         <li>
             Firebase Auth
