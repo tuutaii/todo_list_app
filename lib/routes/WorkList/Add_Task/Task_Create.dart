@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_list_app/routes/WorkList/HomeScreen/Home_Screen.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 import 'Widget/addTask_firebase.dart';
 import 'Widget/description_text.dart';
@@ -15,6 +17,8 @@ class Task extends StatefulWidget {
 }
 
 class _CreateState extends State<Task> {
+  final User? user = FirebaseAuth.instance.currentUser;
+
   String link = '';
   String _project = '', _projectID = '';
 
@@ -52,6 +56,16 @@ class _CreateState extends State<Task> {
       _project = title;
       _projectID = id;
     });
+  }
+
+  Future<void> loadAvatar() async {
+    String _link = await FirebaseStorage.instance
+        .ref('users/avatar/${user!.uid}.png')
+        .getDownloadURL();
+    if (link != _link)
+      setState(() {
+        link = _link;
+      });
   }
 
   @override
@@ -111,7 +125,7 @@ class _CreateState extends State<Task> {
                                   fontSize: 18, fontWeight: FontWeight.bold)),
                           Container(
                             height: 50,
-                            width: 100,
+                            width: 120,
                             decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(40)),
@@ -132,12 +146,12 @@ class _CreateState extends State<Task> {
                                             AssetImage('assets/images/bts.png'),
                                       ),
                                 SizedBox(width: 10),
-                                // Text(
-                                //   users!.displayName.toString().substring(0, 8),
-                                //   style: TextStyle(
-                                //     fontWeight: FontWeight.bold,
-                                //   ),
-                                // ),
+                                Text(
+                                  "${user!.displayName.toString().substring(0,5)}..",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -157,7 +171,7 @@ class _CreateState extends State<Task> {
                             ),
                             child: InkWell(
                               onTap: () {
-                                // openProjectDialog(user!, setProjectValue);
+                                openProjectDialog(user!, setProjectValue);
                               },
                               child: Center(
                                   child: Text(
@@ -222,21 +236,12 @@ class _CreateState extends State<Task> {
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(
-                            height: 20,
-                          ),
+
                           Padding(
                             padding: const EdgeInsets.all(24),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'Add Member',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
                                 Row(
                                   children: <Widget>[
                                     StreamBuilder(
@@ -379,7 +384,6 @@ class _CreateState extends State<Task> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  
                                   Text(data[i]['email']),
                                 ],
                               ),
@@ -404,55 +408,55 @@ class _CreateState extends State<Task> {
         },
       );
 
-  // Future<void> openProjectDialog(User users, Function press) async =>
-  //     await showDialog(
-  //       barrierColor: Colors.transparent,
-  //       context: context,
-  //       builder: (BuildContext context) {
-  //         return StreamBuilder(
-  //           stream: FirebaseFirestore.instance
-  //               .collection('users')
-  //               .doc(users.uid)
-  //               .collection('project')
-  //               .snapshots(),
-  //           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-  //             if (snapshot.hasData) {
-  //               List<QueryDocumentSnapshot<Object?>> data = snapshot.data!.docs;
-  //               return SimpleDialog(
-  //                 backgroundColor: Color(0xFFF4F4F4),
-  //                 contentPadding: EdgeInsets.all(0),
-  //                 children: [
-  //                   for (int i = 0; i < data.length; i++)
-  //                     SimpleDialogOption(
-  //                       child: Padding(
-  //                         padding: const EdgeInsets.all(8.0),
-  //                         child: Text(
-  //                           data[i]['title'].toString(),
-  //                           style: TextStyle(
-  //                             fontSize: 19,
-  //                             fontWeight: FontWeight.w500,
-  //                           ),
-  //                         ),
-  //                       ),
-  //                       onPressed: () {
-  //                         press(data[i]['title'].toString(),
-  //                             data[i]['id'].toString());
-  //                         Navigator.pop(context);
-  //                       },
-  //                     ),
-  //                 ],
-  //               );
-  //             }
-  //             return Container(
-  //               color: Colors.white,
-  //               child: Center(
-  //                 child: Image.asset("assets/images/loader.gif"),
-  //               ),
-  //             );
-  //           },
-  //         );
-  //       },
-  //     );
+  Future<void> openProjectDialog(User users, Function press) async =>
+      await showDialog(
+        barrierColor: Colors.transparent,
+        context: context,
+        builder: (BuildContext context) {
+          return StreamBuilder(
+            stream: FirebaseFirestore.instance
+                .collection('users')
+                .doc(users.uid)
+                .collection('project')
+                .snapshots(),
+            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.hasData) {
+                List<QueryDocumentSnapshot<Object?>> data = snapshot.data!.docs;
+                return SimpleDialog(
+                  backgroundColor: Color(0xFFF4F4F4),
+                  contentPadding: EdgeInsets.all(0),
+                  children: [
+                    for (int i = 0; i < data.length; i++)
+                      SimpleDialogOption(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            data[i]['title'].toString(),
+                            style: TextStyle(
+                              fontSize: 19,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                        onPressed: () {
+                          press(data[i]['title'].toString(),
+                              data[i]['id'].toString());
+                          Navigator.pop(context);
+                        },
+                      ),
+                  ],
+                );
+              }
+              return Container(
+                color: Colors.white,
+                child: Center(
+                  child: Image.asset("assets/images/bts.png"),
+                ),
+              );
+            },
+          );
+        },
+      );
 
   Future pickDate(BuildContext context) async {
     final newDate = await showDatePicker(
