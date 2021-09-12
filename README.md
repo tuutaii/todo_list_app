@@ -76,5 +76,6 @@
     <h4> New Task - Add Check List - Add Note Screen </h4>
     <hr>
     <img src="https://raw.githubusercontent.com/tuutaii/todo_list_app/main/P7.png" alt="">
+    <hr>
    
     
