@@ -47,7 +47,6 @@ class _CreateState extends State<Task> {
       return 'Anytime';
     } else {
       return DateFormat('dd/MM/yyyy').format(_date);
-      // return '${date.month}/${date.day}/${date.year}';
     }
   }
 
@@ -315,7 +314,6 @@ class _CreateState extends State<Task> {
                                               BorderRadius.circular(40)),
                                       child: InkWell(
                                         onTap: () {
-                                          openMemberDialog(addMember, member);
                                         },
                                         child: Center(
                                             child: Text(
@@ -347,70 +345,9 @@ class _CreateState extends State<Task> {
     );
   }
 
-  Future<void> openMemberDialog(Function press, List<String> _listUser) async =>
-      await showDialog(
-        barrierColor: Colors.transparent,
-        context: context,
-        builder: (BuildContext context) {
-          return StreamBuilder(
-            stream: FirebaseFirestore.instance.collection('users').snapshots(),
-            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (snapshot.hasData) {
-                List<QueryDocumentSnapshot<Object?>> data = snapshot.data!.docs;
-                return SimpleDialog(
-                  backgroundColor: Color(0xFFF4F4F4),
-                  contentPadding: EdgeInsets.all(0),
-                  children: [
-                    for (int i = 0; i < data.length; i++)
-                      if (!_listUser.contains(data[i]['uid']))
-                        SimpleDialogOption(
-                          child: Row(
-                            children: [
-                              data[i]['avatar'] != ''
-                                  ? CircleAvatar(
-                                      radius: 25,
-                                      backgroundImage: NetworkImage(
-                                        data[i]['avatar'],
-                                      ),
-                                    )
-                                  : CircleAvatar(
-                                      radius: 25,
-                                      backgroundImage: AssetImage(
-                                        "assets/images/bts.png",
-                                      ),
-                                    ),
-                              SizedBox(width: 20),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(data[i]['email']),
-                                ],
-                              ),
-                            ],
-                          ),
-                          onPressed: () {
-                            press(data[i]['uid']);
-                            Navigator.pop(context);
-                          },
-                        ),
-                  ],
-                );
-              }
-              return Container(
-                color: Colors.white,
-                child: Center(
-                  child: Image.asset("assets/images/bts.png"),
-                ),
-              );
-            },
-          );
-        },
-      );
-
   Future<void> openProjectDialog(User users, Function press) async =>
       await showDialog(
-        barrierColor: Colors.transparent,
+        barrierColor: Colors.black.withOpacity(0.5),
         context: context,
         builder: (BuildContext context) {
           return StreamBuilder(
@@ -423,6 +360,7 @@ class _CreateState extends State<Task> {
               if (snapshot.hasData) {
                 List<QueryDocumentSnapshot<Object?>> data = snapshot.data!.docs;
                 return SimpleDialog(
+                  insetPadding: EdgeInsets.only(bottom: 500),
                   backgroundColor: Color(0xFFF4F4F4),
                   contentPadding: EdgeInsets.all(0),
                   children: [
@@ -434,7 +372,7 @@ class _CreateState extends State<Task> {
                             data[i]['title'].toString(),
                             style: TextStyle(
                               fontSize: 19,
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),

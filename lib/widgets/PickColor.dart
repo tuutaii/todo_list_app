@@ -20,7 +20,7 @@ class _ColorPickerState extends State<ColorPicker> {
     0xFF5ABB56,
     0xFF3D3A62,
     0xFFF4CA8F
-  ]; // List of pickable colors
+  ];
 
   @override
   void initState() {

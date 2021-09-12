@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:todo_list_app/routes/Sign_In/Login.dart';
-import 'package:todo_list_app/routes/Walkthrough/Home.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(fontFamily: 'f1'),
-      home: Screen1(),
+      home: LoginPage(),
     );
   }
 }

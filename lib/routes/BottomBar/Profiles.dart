@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:todo_list_app/widgets/fire_base.dart';
+import 'package:todo_list_app/widgets/Account.dart';
 
 class Profiles extends StatefulWidget {
   const Profiles({Key? key}) : super(key: key);
